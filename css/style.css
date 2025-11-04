@@ -1,0 +1,831 @@
+/* styles.css */
+
+html {
+  scroll-behavior: smooth;
+}
+/* --- 基本重設與全域設定 --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img.placeholder {
+  width: 100%;
+  height: auto;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+}
+
+/* --- 頁首 (Header) --- */
+.main-header {
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.main-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: none;
+  width: 92%;
+}
+
+@media (min-width: 768px) {
+  .main-header .container {
+    width: 95%; /* (100% - 2.5% - 2.5%) */
+  }
+}
+
+/* 4. 大螢幕 (1200px 以上)：左右 1.5% 邊距，讓它非常靠近兩邊 */
+@media (min-width: 1200px) {
+  .main-header .container {
+    width: 97%; /* (100% - 1.5% - 1.5%) */
+  }
+}
+
+/* 首頁透明浮動樣式 */
+.main-header.header-transparent {
+  position: absolute; /* 脫離網頁排版，開始浮動 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100; /* 確保在最上層 */
+  background-color: transparent; /* 透明背景 */
+  border-bottom: none; /* 移除透明時的底線 */
+  padding: 20px 0;
+}
+
+/* 設定透明頁首上的文字顏色 */
+.main-header.header-transparent .logo,
+.main-header.header-transparent .main-nav a,
+.main-header.header-transparent .header-icons a {
+  color: #000000; /* 假設圖片很暗，我們用白色文字 */
+  /* 如果您的 LOGO 是淺色，這裡可能要改成 #000000 */
+}
+
+.logo img {
+  height: 50px;  /* 在這裡設定您希望的 LOGO 高度 */
+  width: auto;   /* 寬度會自動等比例縮放 */
+  display: block; /* 避免圖片下方出現多餘空間 */
+}
+
+.main-nav ul,
+.header-icons ul {
+  display: flex;
+  gap:  30px;
+}
+
+.main-nav a {
+  font-size: 16px;
+  color: #555;
+}
+
+.header-icons {
+}
+
+.header-icons ul {
+  display: flex;
+  gap: 25px; /* 從 20px 增加到 25px (您可以自行調整) */
+  align-items: center; /* 確保圖示們垂直置中對齊 */
+}
+
+.header-icons li a img {
+  height: 24px;  /* 在這裡設定您希望的圖示高度 (例如 24px) */
+  width: auto;   /* 寬度會自動等比例縮放 */
+  display: block; /* 避免圖片下方出現多餘空間 */
+}
+
+/* --- 頁尾 (Footer) (新) --- */
+.main-footer {
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  padding: 40px 0;
+  text-align: center;
+  color: #777;
+  margin-top: 60px; /* 和上方區塊的間距 */
+}
+
+/* 1. 社群圖示 */
+.footer-social ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+.footer-social img {
+  height: 24px; /* 圖示高度 */
+  width: 24px;  /* 圖示寬度 */
+  display: block;
+}
+
+/* 2. 頁尾連結 */
+.footer-links ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* 手機上會自動換行 */
+  gap: 15px 25px; /* 上下15px, 左右25px */
+  margin-bottom: 25px;
+}
+.footer-links a {
+  font-size: 14px;
+  color: #333; /* 文字顏色深一點 */
+  font-weight: 500;
+}
+
+/* 3. 聯絡資訊 */
+.footer-contact {
+  font-size: 13px;
+  line-height: 1.8;
+  margin-bottom: 25px;
+}
+
+/* 4. 版權資訊 */
+.footer-copyright {
+  font-size: 12px;
+  color: #999;
+  line-height: 1.6;
+}
+.footer-copyright img {
+  height: 16px;
+  width: 16px;
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+/* --- 按鈕 (Button) --- */
+.btn {
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid #333;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.btn-dark {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #333;
+}
+.btn-dark:hover {
+  background-color: #555;
+}
+
+/* --- 產品格線 (Product Grid) --- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.product-card {
+  text-align: left;
+}
+
+.product-card .product-info {
+  padding: 10px 0;
+}
+
+.product-card .product-name {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.product-card .product-price {
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.product-card .shop-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: #f5f5f5;
+  padding: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  border: 1px solid #eee;
+}
+
+/* --- (Page 1) Hero Section --- */
+.hero {
+  position: relative;
+  text-align: center;
+  margin-bottom: 60px;
+
+  height: 100vh; /* 100% of the viewport height */
+  width: 100%;
+  margin-top: 0; /* 確保它從最頂端開始 */
+  overflow: hidden; /* 隱藏超出範圍的圖片內容 */
+}
+
+/* --- ↓↓↓ 這是一個新的樣式 ↓↓↓ --- */
+.hero .hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 關鍵：填滿容器，保持比例 */
+  object-position: center; /* 圖片裁切時保持置中 */
+}
+
+.hero .btn {
+  position: absolute;
+  bottom: 100px;  /* 從 40px 或 80px 增加到 100px (您可以自行調整) */
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* --- 2. 大小 (變大) --- */
+  padding: 14px 32px;  /* 增加上下與左右的內邊距 */
+  font-size: 16px;     /* 放大字體 */
+  font-weight: 600;    /* 讓字體更顯眼 */
+  letter-spacing: 1px; /* 增加字元間距 */
+
+  /* --- 3. 初始狀態 (只有字和線段) --- */
+  background-color: transparent; /* 1. 移除填充 (透明背景) */
+  color: #333;                  /* 2. 設定文字顏色 (黑色) */
+  border: 2px solid #333;
+}
+
+.hero .btn:hover {
+  background-color: #333; /* 1. 變成黑底 */
+  color: #fff;           /* 2. 變成白字 */
+  border-color: #333;   /* 3. 邊框也變成黑色 (為了保持一致性) */
+}
+
+/*
+--- (Page 1) Sections --- */
+.section {
+  margin-bottom: 60px;
+}
+
+/*.section-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 30px;
+}
+
+.promo-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.promo-card {
+  background-color: #f0f0f0;
+  padding: 40px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+}*/
+
+/* --- (Page 1) 靈感區塊 (Inspiration Section) --- */
+.section.inspiration {
+  margin-top: 60px; /* 讓它和頂部 Hero 區塊保持一點距離 */
+}
+
+.inspiration-header {
+  display: flex;
+  align-items: baseline; /* 讓主標題和副標題的文字底部對齊 */
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.inspiration-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  white-space: nowrap; /* 避免標題換行 */
+}
+
+.inspiration-header p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* --- (Page 1) 靈感區塊 - 促銷導覽列 (已更新) --- */
+
+.inspiration-promo-nav {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.inspiration-promo-nav ul {
+  /* 1. 使用 Grid 達成四欄平分 */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 建立 4 個 1fr (等寬) 的欄位 */
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.inspiration-promo-nav li {
+  height: 100%; /* 讓 li 撐滿 grid 儲存格的高度 */
+}
+
+.inspiration-promo-nav a {
+  display: flex;
+  align-items: center;
+  padding: 15px 25px; /* 增加上下內距，並套用在 a 標籤上 */
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  height: 100%; /* 讓 a 標籤也撐滿 */
+  text-decoration: none;
+
+  /* 2. 為背景和顏色變化加入過場動畫 */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 3. 設定 Active 和 Hover 狀態 (黑底白字) */
+.inspiration-promo-nav a:hover,
+.inspiration-promo-nav li.active a {
+  background-color: #333;
+  color: #fff;
+}
+
+/* -------------------------------------- */
+/* 4. 箭頭樣式與動畫                   */
+/* -------------------------------------- */
+
+/* 箭頭 (→) 的基本樣式 */
+.inspiration-promo-nav li a::after {
+  content: '→';
+  margin-left: 25px;
+  font-weight: normal;
+  color: #888;
+
+  /* 為了讓 transform 生效 */
+  display: inline-block;
+
+  /* 3. 為箭頭的旋轉和顏色變化加入過場動畫 */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* 讓第一個項目 (NEW IN) 預設粗體 */
+.inspiration-promo-nav li:first-child a {
+  font-weight: 700;
+}
+
+/* 確保 Active 狀態也是粗體 */
+.inspiration-promo-nav li.active a {
+  font-weight: 700;
+}
+
+/* 3. 設定箭頭在 Active 和 Hover 時的樣式 (變白 & 旋轉) */
+.inspiration-promo-nav a:hover::after,
+.inspiration-promo-nav li.active a::after {
+  color: #fff;
+  transform: rotate(90deg); /* 旋轉 90 度 (變成 '↓') */
+}
+
+.inspiration-main-image {
+  margin: 30px 0; /* 大圖的上下間距 */
+}
+
+.inspiration-main-image img {
+  width: 100%;
+  height: auto;
+  display: block; /* 移除圖片底部的奇怪空隙 */
+}
+
+/* --- (Page 1) 編輯精選 | 靈感穿搭 (已更新) --- */
+.section.editor-pick {
+  margin-top: 60px;
+}
+
+.editor-pick-header {
+  display: flex; /* 改為 flex 佈局 */
+  align-items: baseline; /* 讓主標題和副標題的文字底部對齊 */
+  gap: 20px; /* 標題和副標題的間距 */
+  margin-bottom: 30px; /* 和下方輪播的間距 (可自行調整) */
+}
+.editor-pick-header h2 {
+  font-size: 24px;     /* 和 .inspiration-header h2 一致 */
+  font-weight: 600;    /* 和 .inspiration-header h2 一致 */
+  white-space: nowrap; /* 避免標題換行 */
+}
+.editor-pick-header p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* 輪播容器共用樣式 */
+.carousel-container {
+  position: relative;
+  overflow: hidden; /* 隱藏超出容器的內容 */
+  margin-bottom: 30px; /* 每個輪播區塊之間的間距 */
+}
+
+.carousel-track {
+  display: flex; /* 水平排列圖片 */
+  width: fit-content; /* 確保 track 寬度足夠容納所有圖片 */
+  animation-timing-function: linear; /* 讓動畫保持勻速 */
+  animation-iteration-count: infinite; /* 無限循環 */
+}
+
+.carousel-track img {
+  height: auto;
+  object-fit: cover;
+  display: block;
+  /* 圖片間距將由 JS 處理或直接包含在圖片檔案內 */
+}
+
+/* --- 上半部分：水平輪播 (大圖) --- */
+.carousel-horizontal .carousel-track {
+  animation-name: scrollHorizontal; /* 綁定水平滾動動畫 */
+  animation-duration: 40s; /* 滾動一周的時間 (越長越慢) */
+}
+
+.carousel-horizontal .carousel-track img {
+  width: 300px; /* 每張大圖的寬度 (請依 wireframe 調整) */
+  height: 400px; /* 每張大圖的高度 (請依 wireframe 調整) */
+  margin-right: 20px; /* 圖片之間的間距 */
+}
+/* 移除最後一張圖片的右邊距 */
+.carousel-horizontal .carousel-track img:last-child {
+  margin-right: 0;
+}
+
+
+/* --- (Page 1) 編輯精選 6x4 垂直滾動網格 (新) --- */
+
+/* 1. 「窗口」 (Container) */
+.carousel-vertical-grid {
+  overflow: hidden; /* 隱藏超出範圍的內容 */
+  margin-top: 30px; /* 和上方水平輪播的間距 */
+
+  /* * 關鍵：設定窗口高度
+  * 這裡我們需要估算「兩排」的高度。
+  * 假設圖片寬度約 180px (1200px / 6)，
+  * 且 aspect-ratio: 1/1，所以圖片高 180px。
+  * 兩排 + 一個間距 = 180 + 180 + 15 = 375px
+  * 您可以自行調整 375px 這個值，直到您滿意為止。
+  */
+  height: 375px;
+}
+
+/* 2. 「滾動的內容」 (Track + Grid) */
+.carousel-vertical-grid .editor-pick-grid {
+  /* (A) 網格佈局 */
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+
+  /* (B) 動畫屬性 */
+  height: fit-content;
+  animation-name: scrollVertical;
+  animation-duration: 80s; /* 24張圖，用更長的時間滾動 (越長越慢) */
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* 3. 網格中的圖片 */
+.carousel-vertical-grid .editor-pick-grid img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1; /* 保持 1:1 正方形 */
+  object-fit: cover;
+  display: block;
+}
+
+
+
+/* 輪播箭頭 (可選，但 wireframe 有顯示) */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #555;
+  z-index: 10;
+}
+.carousel-arrow.left {
+  left: 10px;
+}
+.carousel-arrow.right {
+  right: 10px;
+}
+.carousel-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+/* --- CSS @keyframes 動畫定義 --- */
+
+/* 水平滾動動畫 */
+@keyframes scrollHorizontal {
+  from {
+    transform: translateX(0); /* 從 0 位置開始 */
+  }
+  to {
+    /* 將整個 track 往左移動一個完整複製內容的寬度 */
+    /* JS 會計算這個值 */
+  }
+}
+
+/* 垂直滾動動畫 */
+@keyframes scrollVertical {
+  from {
+    transform: translateY(0); /* 從 0 位置開始 */
+  }
+  to {
+    /* 將整個 track 往上移動一個完整複製內容的高度 */
+    /* JS 會計算這個值 */
+  }
+}
+
+.carousel-placeholder {
+  height: 400px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 30px;
+  color: #999;
+}
+
+/* --- (Page 1) Life Store 區塊 (新) --- */
+
+.section.life-store {
+  margin-top: 60px; /* 和上方區塊的間距 */
+  /* * 我們不再需要 container 內的 padding，
+   * 因為標題有自己的 .container，
+   * 而 banner 需要是滿版的。
+   */
+}
+
+/* 1. 標題/副標題 (排版同 .inspiration-header) */
+.life-store-header {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 30px; /* 標題和圖片的間距 */
+}
+
+.life-store-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.life-store-header p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* 2. 單張大圖的容器 */
+.life-store-banner {
+  position: relative; /* 為了讓按鈕可以浮動在它上面 */
+  text-align: center; /* 讓按鈕在 translateX(-50%) 之前先置中 */
+}
+
+.life-store-banner img {
+  width: 100%; /* 圖片滿版 */
+  height: auto;
+  display: block;
+}
+
+/* 3. 按鈕 (浮動在圖片上) */
+.life-store-banner .btn {
+  position: absolute;
+  bottom: 40px; /* 距離圖片底部的距離 */
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* 樣式 (採用 wireframe 的描邊樣式) */
+  background-color: #fff; /* 背景白色 */
+  color: #333;           /* 文字黑色 */
+  border: 2px solid #333; /* 黑色邊框 */
+  padding: 12px 28px;   /* 調整按鈕大小 */
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.life-store-banner .btn:hover {
+  background-color: #333; /* Hover 效果：黑底白字 */
+  color: #fff;
+  border-color: #333;
+}
+
+/* --- (Page 2) Category Header --- */
+.category-header {
+  text-align: center;
+  margin: 40px 0;
+}
+.category-header h1 {
+  font-size: 24px;
+  font-weight: 500;
+}
+.category-header p {
+  font-size: 14px;
+  color: #888;
+  margin-top: 10px;
+}
+
+/* --- (Page 2) Pagination --- */
+.pagination {
+  margin-top: 40px;
+  text-align: center;
+}
+.pagination ul {
+  display: inline-flex;
+  gap: 10px;
+}
+.pagination li {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+}
+.pagination li.active {
+  background: #333;
+  color: #fff;
+  border-color: #333;
+}
+
+/* --- (Page 3) Product Detail --- */
+.product-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin: 40px 0;
+}
+
+.product-gallery .main-image {
+  margin-bottom: 10px;
+}
+.product-gallery .thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.product-info .promo-tag {
+  color: #d00;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.product-info h1 {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.product-info .product-meta {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 15px;
+}
+.product-info .product-notes {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 20px;
+}
+.product-info .product-price {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.product-info .sales-count {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 20px;
+}
+.product-info .size-options {
+  margin-bottom: 20px;
+}
+.product-info .size-options button {
+  padding: 8px 12px;
+  min-width: 40px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  margin-right: 5px;
+}
+.product-info .size-options button:hover,
+.product-info .size-options button.active {
+  border-color: #333;
+  background: #333;
+  color: #fff;
+}
+.product-info .quantity-selector {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.product-info .quantity-selector button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+}
+.product-info .quantity-selector span {
+  padding: 0 15px;
+  font-size: 16px;
+}
+.product-info .add-to-cart {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+}
+
+/* --- (Page 3) Product Tabs --- */
+.product-tabs {
+  border-top: 1px solid #eee;
+  margin-top: 40px;
+}
+.tab-nav {
+  display: flex;
+  gap: 30px;
+  border-bottom: 1px solid #eee;
+}
+.tab-nav button {
+  padding: 15px 0;
+  border: none;
+  background: none;
+  font-size: 15px;
+  color: #888;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+.tab-nav button.active {
+  color: #333;
+  border-bottom-color: #333;
+}
+.tab-content {
+  padding: 30px 0;
+  min-height: 200px;
+  background: #f9f9f9;
+  margin-top: -1px; /* To connect with border */
+  text-align: center;
+  color: #999;
+}
+
+/* --- 右下角固定廣告 (新) --- */
+.sticky-ad {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 200px;
+  height: 109px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: block;
+
+  /* 淡入/滑上 動畫設定 */
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.sticky-ad img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 廣告的隱藏狀態 */
+.sticky-ad.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px); /* 隱藏時稍微往下移 */
+}
