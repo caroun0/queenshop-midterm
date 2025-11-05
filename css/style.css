@@ -549,7 +549,87 @@ img.placeholder {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
+/* --- (Page 3) Modal (Popup) 樣式 --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* 黑色半透明遮罩 */
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  /* 預設隱藏 */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto; /* 啟用點擊 */
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: relative; /* 為了 close button */
+
+  /* 設定最大寬度和高度，符合截圖 */
+  max-width: 900px; /* 限制最大寬度 */
+  max-height: 90vh; /* 限制最大高度 (90% 視窗高度) */
+  overflow-y: auto; /* 內容過長時滾動 */
+
+  /* 彈出動畫 */
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1); /* 彈出動畫 */
+}
+
+.modal-content img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #555;
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10;
+}
+.modal-close:hover {
+  color: #000;
+}
+
+.accordion-image-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 欄並排 */
+  gap: 10px; /* 圖片間距 */
+
+  /* 確保它和 <p> 標籤有相同的底部間距 */
+  padding-bottom: 18px;
+}
+.accordion-image-grid img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
 /* --- CSS @keyframes 動畫定義 --- */
 
 /* 水平滾動動畫 */
@@ -683,101 +763,294 @@ img.placeholder {
   border-color: #333;
 }
 
-/* --- (Page 3) Product Detail --- */
+/* --- (Page 3) Product Detail (新版) --- */
 .product-detail {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* 左欄 1.2fr, 右欄 1fr, 總共 2.2fr */
+  grid-template-columns: 1.2fr 1fr;
   gap: 50px;
   margin: 40px 0;
+  /* 讓兩欄從頂部開始對齊 */
+  align-items: start;
 }
 
-.product-gallery .main-image {
-  margin-bottom: 10px;
+/* 1. 左側圖片堆疊 */
+.product-gallery-stack {
 }
-.product-gallery .thumbnail-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+.product-gallery-stack img {
+  width: 100%;
+  height: auto;
+}
+/* (新增)  gallery-images-set 的隱藏/顯示規則 */
+.product-gallery-stack .gallery-images-set {
+  display: none; /* 預設全部隱藏 */
+  flex-direction: column;
+  gap: 15px; /* 圖片間距 */
+}
+.product-gallery-stack .gallery-images-set.active {
+  display: flex; /* 只顯示 "active" 的那一組 */
 }
 
-.product-info .promo-tag {
+/* 2. 右側黏性側邊欄 */
+.product-info-sticky {
+  /* 關鍵：讓它黏在頂部 */
+  position: sticky;
+  top: 120px; /* 距離頂部 120px (避開 header) */
+
+  /* 確保側邊欄內容可以滾動 (如果太長的話) */
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+  padding-right: 15px; /* 留出滾動條空間 */
+}
+
+/* --- 右側內容排版 --- */
+.product-info-sticky .promo-tag {
   color: #d00;
   font-weight: bold;
   margin-bottom: 10px;
 }
-.product-info h1 {
-  font-size: 22px;
-  font-weight: 500;
-  margin-bottom: 10px;
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 5px;
 }
-.product-info .product-meta {
+.product-header h1 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.product-header .sales-count {
+  font-size: 13px;
+  color: #888;
+  white-space: nowrap;
+}
+.product-info-sticky .product-meta {
   font-size: 13px;
   color: #888;
   margin-bottom: 15px;
 }
-.product-info .product-notes {
+.product-info-sticky .product-notes {
   font-size: 13px;
   color: #777;
   margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
 }
-.product-info .product-price {
+.product-price-wishlist {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.product-info-sticky .product-price {
   font-size: 24px;
   font-weight: bold;
+}
+.product-wishlist {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #aaa;
+}
+.product-wishlist:hover {
+  color: #d00;
+}
+.product-option-group {
+  margin-bottom: 20px;
+}
+.product-option-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
   margin-bottom: 10px;
 }
-.product-info .sales-count {
-  font-size: 14px;
-  color: #888;
-  margin-bottom: 20px;
+/* (更新) 顏色選項 */
+.color-swatches {
+  display: flex;
+  gap: 10px;
 }
-.product-info .size-options {
-  margin-bottom: 20px;
+.swatch {
+  width: 30px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0; /* 移除 button 預設 padding */
+  overflow: hidden; /* 讓圖片填滿 */
 }
-.product-info .size-options button {
+.swatch img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 確保圖片填滿按鈕 */
+}
+.swatch.active {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+.swatch.active {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.size-options button {
   padding: 8px 12px;
-  min-width: 40px;
+  min-width: 45px;
   border: 1px solid #ccc;
   background: #fff;
   cursor: pointer;
-  margin-right: 5px;
 }
-.product-info .size-options button:hover,
-.product-info .size-options button.active {
+.size-options button:hover {
+  border-color: #888;
+}
+.size-options button.active {
   border-color: #333;
   background: #333;
   color: #fff;
 }
-.product-info .quantity-selector {
+.availability-tabs {
   display: flex;
-  align-items: center;
   margin-bottom: 20px;
 }
-.product-info .quantity-selector button {
-  width: 30px;
-  height: 30px;
+.availability-tabs button {
+  flex: 1;
+  padding: 10px;
   border: 1px solid #ccc;
-  background: #f5f5f5;
+  background: #f9f9f9;
+  cursor: pointer;
+  font-size: 14px;
 }
-.product-info .quantity-selector span {
-  padding: 0 15px;
+.availability-tabs button:first-child {
+  border-right: none;
+}
+.availability-tabs button.active {
+  background: #fff;
+  font-weight: 600;
+  border-top: 2px solid #333;
+  border-bottom: 1px solid #fff; /* 蓋住底部邊框 */
+}
+.product-info-sticky .quantity-selector {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+.quantity-selector button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #f5f5f5;
+  font-size: 20px;
+  cursor: pointer;
+}
+.quantity-selector span {
+  flex: 1;
+  text-align: center;
   font-size: 16px;
 }
-.product-info .add-to-cart {
+.add-to-cart {
   width: 100%;
   padding: 15px;
   font-size: 16px;
+  font-weight: 600;
 }
 
-/* --- (Page 3) Product Tabs --- */
-.product-tabs {
+/* 推薦搭配 (側邊欄內) */
+.recommended-section {
+  margin-top: 30px;
+  padding-top: 30px;
   border-top: 1px solid #eee;
-  margin-top: 40px;
 }
-.tab-nav {
-  display: flex;
-  gap: 30px;
+.recommended-section h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.recommended-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.rec-item {
+  font-size: 13px;
+  line-height: 1.4;
+}
+.rec-item img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 8px;
+}
+.rec-item p {
+  margin-bottom: 5px;
+}
+.rec-item p:last-of-type {
+  font-weight: bold;
+}
+.shop-btn-small {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: #f5f5f5;
+  padding: 8px 0;
+  font-size: 13px;
+  font-weight: bold;
+  border: 1px solid #eee;
+  margin-top: 8px;
+}
+
+/* 商品資訊 (手風琴) */
+.product-accordion {
+  margin-top: 30px;
+  border-top: 1px solid #eee;
+}
+.accordion-item {
   border-bottom: 1px solid #eee;
 }
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 18px 0;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+}
+.accordion-icon {
+  font-size: 20px;
+  font-weight: 400;
+  transition: transform 0.3s ease;
+}
+.accordion-content {
+  /* 預設隱藏 */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  font-size: 14px;
+  color: #555;
+  padding: 0 5px; /* 左右一點內距 */
+}
+.accordion-content p {
+  padding-bottom: 18px;
+}
+
+/* 手風琴展開時的樣式 */
+.accordion-item.active .accordion-content {
+  max-height: 500px; /* 設一個足夠大的高度 */
+}
+.accordion-item.active .accordion-icon {
+  transform: rotate(45deg); /* + 號變 x 號 */
+}
+
 .tab-nav button {
   padding: 15px 0;
   border: none;
@@ -790,14 +1063,6 @@ img.placeholder {
 .tab-nav button.active {
   color: #333;
   border-bottom-color: #333;
-}
-.tab-content {
-  padding: 30px 0;
-  min-height: 200px;
-  background: #f9f9f9;
-  margin-top: -1px; /* To connect with border */
-  text-align: center;
-  color: #999;
 }
 
 /* --- 右下角固定廣告 (新) --- */
@@ -828,4 +1093,157 @@ img.placeholder {
   opacity: 0;
   pointer-events: none;
   transform: translateY(20px); /* 隱藏時稍微往下移 */
+}
+
+/* --- (Page 4) Editor's Pick 頁面 --- */
+
+
+/* --- (Page 4) Editor's Pick 頁面 --- */
+
+/* 1. 頂部橫幅 (已更新為重疊) */
+.editor-pick-banner {
+  width: 100%;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+
+  /* (A) 關鍵：設為 relative，才能讓文字浮動在它內部 */
+  position: relative;
+
+  /* (B) 移除 padding 和 bg-color，由圖片填滿 */
+}
+
+/* (C) 新增：一個深色遮罩，讓白色文字更易讀 */
+.editor-pick-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* 30% 透明度的黑色遮罩 */
+  z-index: 5; /* 夾在圖片和文字中間 */
+}
+
+/* 2. 橫幅中的文字 (已更新) */
+.editor-pick-banner .banner-text {
+  /* (D) 關鍵：設為 absolute，讓它浮動起來 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 完美置中 */
+  z-index: 10; /* 確保在最上層 */
+
+  /* (E) 移除舊的 flex 佈局，改為置中 */
+  text-align: center;
+  width: 100%; /* 確保它有寬度 */
+}
+
+/* 3. 橫幅文字顏色 (已更新) */
+.editor-pick-banner h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff; /* 改為白色 */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5); /* 加上陰影增加易讀性 */
+}
+.editor-pick-banner p {
+  font-size: 14px;
+  color: #fff; /* 改為白色 */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4); /* 加上陰影 */
+}
+
+/* 4. 頂部圖片六宮格 (已更新) */
+.editor-pick-top-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  width: 100%;
+
+  /* (F) 移除 margin-top，讓它貼齊 banner 頂部 */
+  /* margin-top: 40px; <-- 已移除 */
+}
+
+.editor-pick-top-grid img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  /* (G) 移除圖片間的垂直小空隙 */
+  vertical-align: top;
+}
+
+.filter-bar {
+  display: flex;
+
+  /* (A) 關鍵修正：將 justify-content 改為 flex-end */
+  justify-content: flex-end; /* 讓所有內容都靠右對齊 */
+
+  align-items: center;
+  gap: 40px; /* 在「分頁群組」和「排序」之間增加間距 */
+
+  padding: 15px 0;
+  margin-bottom: 30px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+/* (B) 新增：分頁群組的樣式 */
+.filter-pagination-group {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* 在 "10 items" 和分頁數字之間增加間距 */
+}
+
+.filter-bar .item-count {
+  color: #888;
+}
+
+/* (C) 新增：「排序」功能的樣式 */
+.sort-by-filter a {
+  font-weight: 600;
+  color: #333;
+  /* 根據 wireframe 加上底線 */
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+/* 3. 非對稱商品網格 */
+.asymmetrical-product-grid {
+  display: grid;
+  /* * 建立 3 個欄位
+    * 比例為：大圖(1.5fr) | 小圖(1fr) | 小圖(1fr)
+    * (您可以自行調整 1.5fr 這個比例)
+  */
+  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-auto-rows: auto; /* 讓 row 高度自動 */
+  gap: 25px; /* 網格間距 */
+}
+
+/* 讓 .product-card-large 跨 2 個 row */
+.product-card-large {
+  /* * 讓這個項目：
+    * 1. 欄位(column) 從 1 開始，跨 1 個欄位
+    * 2. 列(row) 從 1 開始，跨 2 個列
+  */
+  grid-column: 1 / 2;
+  grid-row: span 2;
+}
+
+.outfit-card,
+.outfit-card a,
+.outfit-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.outfit-card img {
+  object-fit: cover; /* 裁切以填滿 */
+}
+
+/* 確保 .product-card 內的圖片填滿 */
+.asymmetrical-product-grid .product-card img {
+  width: 100%;
+  height: auto; /* 讓圖片高度撐滿 */
+  object-fit: cover; /* 裁切以填滿 */
 }
