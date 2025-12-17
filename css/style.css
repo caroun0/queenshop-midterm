@@ -273,7 +273,6 @@ img.placeholder {
 .hero {
   position: relative;
   text-align: center;
-  margin-bottom: 60px;
   height: 100vh; /* 滿版高度 */
   width: 100%;
   margin-top: 0; /* 確保從頂端開始 */
@@ -292,19 +291,26 @@ img.placeholder {
   bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
+
+  /* 大小與字體設定 (維持原樣) */
   padding: 14px 32px;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 1px;
-  background-color: transparent;
-  color: #333;
-  border: 2px solid #333;
+
+  /* --- 顏色修改重點 --- */
+  background-color: transparent; /* 背景透明 */
+  color: #fff;                   /* 文字改成白色 */
+  border: 2px solid #fff;        /* 邊框改成白色 (線框) */
+
+  transition: all 0.3s ease;     /* 加入滑順動畫 */
 }
 
+/* 滑鼠移上去的效果 (Hover) */
 .hero .btn:hover {
-  background-color: #333;
-  color: #fff;
-  border-color: #333;
+  background-color: #fff; /* 背景變成白色 */
+  color: #333;            /* 文字變成深色 */
+  border-color: #fff;     /* 邊框保持白色 */
 }
 
 /* --- (Page 1) Sections --- */
@@ -312,10 +318,6 @@ img.placeholder {
   margin-bottom: 60px;
 }
 
-/* --- (Page 1) 靈感區塊 (Inspiration Section) --- */
-.section.inspiration {
-  margin-top: 60px;
-}
 
 .inspiration-header {
   display: flex;
@@ -456,7 +458,7 @@ img.placeholder {
 .carousel-vertical-grid {
   overflow: hidden;
   margin-top: 30px;
-  height: 375px;
+  height: 400px;
 }
 .carousel-vertical-grid .editor-pick-grid {
   display: grid;
@@ -1027,4 +1029,267 @@ img.placeholder {
   width: 100%;
   height: auto;
   object-fit: cover;
+}
+/* --- 首頁：探索本週靈感 4格圖片排版 (滿版無縫風格) --- */
+
+.inspiration-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2x2 排列 */
+
+  /* ★ 關鍵修改 1：移除 margin-top，讓它向上貼齊 Hero Banner */
+  margin-top: 0;
+
+  /* ★ 關鍵修改 2：設定寬度 100%，確保左右填滿螢幕 */
+  width: 100%;
+
+  /* ★ 關鍵修改 3：設定間距 (Gap) */
+  /* 如果你想要完全無縫貼齊，設為 0 */
+  /* 如果你想要像參考圖那樣有一點白色縫隙，設為 10px 或 20px */
+  gap: 0px;
+}
+
+.inspiration-item {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+
+  /* 保持正方形比例 (如果你希望圖片扁一點，可以改成 16/9) */
+  aspect-ratio: 1 / 1;
+}
+
+.inspiration-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 填滿格子 */
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+/* 滑鼠移入放大特效 */
+.inspiration-item:hover img {
+  transform: scale(1.05);
+}
+
+/* RWD 手機版：變成垂直排列 */
+@media (max-width: 768px) {
+  .inspiration-grid {
+    grid-template-columns: 1fr; /* 改成一欄 */
+  }
+}
+
+/* --- Menu 按鈕 (Header 內) --- */
+.menu-trigger-container {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff; /* 白色文字 */
+}
+.menu-btn .bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: #fff;
+  margin-bottom: 4px; /* 漢堡線條間距 */
+}
+/* 讓漢堡圖示排成三條線 */
+.menu-btn span:not(.menu-text) {
+  display: block; /* 確保線條顯示 */
+}
+.menu-btn .menu-text {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+/* --- 側邊欄容器 (預設隱藏在左邊) --- */
+.sidebar-nav {
+  position: fixed;
+  top: 0;
+  left: -320px; /* 藏在螢幕左邊外面 */
+  width: 300px;
+  height: 100%;
+  background-color: #fff;
+  z-index: 2000;
+  transition: left 0.4s ease; /* 滑動動畫 */
+  overflow-y: auto; /* 內容太多時可捲動 */
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+.sidebar-nav.active {
+  left: 0; /* 滑入螢幕 */
+}
+
+/* 遮罩 (背景變暗) */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+}
+.sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* --- 側邊欄內部樣式 --- */
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+.sidebar-logo {
+  height: 30px;
+  /* 如果 Logo 原本是白色，這裡要反轉回黑色，因為側邊欄背景是白色的 */
+  filter: none;
+}
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #333;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 主分類連結 */
+.sidebar-list > li {
+  border-bottom: 1px solid #f5f5f5;
+}
+.main-link, .submenu-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  font-size: 15px;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.main-link:hover, .submenu-toggle:hover {
+  background-color: #f9f9f9;
+}
+
+/* 子選單 (預設收起) */
+.submenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #fbfbfb;
+  max-height: 0; /* 高度為 0 (隱藏) */
+  overflow: hidden;
+  transition: max-height 0.4s ease; /* 開合動畫 */
+}
+.sidebar-list li.open .submenu {
+  max-height: 500px; /* 展開後的最大高度，設一個夠大的值即可 */
+}
+.sidebar-list li.open .arrow {
+  transform: rotate(45deg); /* 加號變叉叉或旋轉 */
+}
+
+.submenu li a {
+  display: block;
+  padding: 12px 40px; /* 子選單縮排 */
+  font-size: 14px;
+  color: #666;
+  text-decoration: none;
+}
+.submenu li a:hover {
+  color: #000;
+}
+
+.highlight {
+  color: #d00 !important;
+}
+
+/* --- Header 5個文字按鈕樣式 --- */
+.main-nav {
+  width: 100%;
+  margin-top: 10px; /* 與 Logo 保持一點距離 */
+}
+
+.main-nav ul {
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  gap: 40px; /* 按鈕之間的間距 */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav li a {
+  text-decoration: none;
+  font-size: 15px;
+  color: #fff; /* ★ 強制白色文字 (因為背景是黑漸層) */
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent; /* 預留底線位置 */
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* 滑鼠移過去的特效 */
+.main-nav li a:hover {
+  border-bottom: 2px solid #fff; /* 出現白色底線 */
+  opacity: 1;
+}
+
+/* 手機版隱藏這五個字 (手機版通常還是需要漢堡選單，這裡先隱藏) */
+@media (max-width: 768px) {
+  .main-nav {
+    display: none;
+  }
+}
+
+/* --- 側邊欄多內容切換 --- */
+
+/* 1. 預設隱藏所有內容列表 */
+.menu-content {
+  display: none;
+}
+
+/* 2. 只有被加上 .active 的內容才會顯示 */
+.menu-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+/* 3. 側邊欄小標題樣式 */
+.section-title {
+  padding: 15px 25px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* 簡單的淡入動畫 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
 }

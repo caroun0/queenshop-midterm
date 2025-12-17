@@ -1,12 +1,11 @@
-/* js/main.js (已更新並修正錯誤) */
+/* js/main.js (修正版) */
 
 // -----------------------------------------------------------------
 // 1. 您的內容資料庫
 // -----------------------------------------------------------------
 const inspirationData = {
-  // "NEW IN" 對應 data-tab="new-in"
   'new-in': {
-    mainImage: 'img/inspiration-new-in.jpg', // "NEW IN" 的大圖
+    mainImage: 'img/inspiration-new-in.jpg',
     products: [
       { name: '抽鬚剪接設計傘擺牛仔裙 S/M/L', price: 'NT 790', img: 'img/product-1.jpg', url: 'product.html' },
       { name: '大口袋工裝設計彎刀長褲 兩色售 S/M/L', price: 'NT 790', img: 'img/product-2.jpg', url: 'product.html' },
@@ -14,9 +13,8 @@ const inspirationData = {
       { name: '荷葉透紗花苞罩衫背心 三色售', price: 'NT 590', img: 'img/product-4.jpg', url: 'product.html' }
     ]
   },
-  // "COOL FFEELING" 對應 data-tab="cool"
   'cool': {
-    mainImage: 'img/inspiration-cool.jpg', // "COOL FFEELING" 的大圖
+    mainImage: 'img/inspiration-cool.jpg',
     products: [
       { name: '涼感小花印字寬版上衣 兩色售', price: 'NT 490', img: 'img/product-5.jpg', url: 'product.html' },
       { name: '涼感輕薄下擺抽繩連帽外套 三色售', price: 'NT 690', img: 'img/product-6.jpg', url: 'product.html' },
@@ -24,9 +22,8 @@ const inspirationData = {
       { name: '涼感鬆緊腰頭綁帶長褲 五色售 S/M', price: 'NT 690', img: 'img/product-8.jpg', url: 'product.html' }
     ]
   },
-  // "最新聯名" 對應 data-tab="collab"
   'collab': {
-    mainImage: 'img/inspiration-collab.jpg', // "最新聯名" 的大圖
+    mainImage: 'img/inspiration-collab.jpg',
     products: [
       { name: '姵萱聯名 立體手繪花花刺繡縫線針織毛衣-綠', price: 'NT 1380', img: 'img/product-9.jpg', url: 'product.html' },
       { name: '姵萱聯名 袖抽皺娃娃領牛仔上衣-深藍 S/M', price: 'NT 1280', img: 'img/product-10.jpg', url: 'product.html' },
@@ -34,9 +31,8 @@ const inspirationData = {
       { name: '姵萱聯名 澎袖透紗綁帶異材質上衣-米白 S/M', price: 'NT 1180', img: 'img/product-12.jpg', url: 'product.html' }
     ]
   },
-  // "穿搭大賽" 對應 data-tab="contest"
   'contest': {
-    mainImage: 'img/inspiration-contest.jpg', // "穿搭大賽" 的大圖
+    mainImage: 'img/inspiration-contest.jpg',
     products: [
       { name: '兩面穿排釦抓皺設計透膚長袖上衣 三色售', price: 'NT 490', img: 'img/product-13.jpg', url: 'product.html' },
       { name: '豹紋設計直筒長裙附皮帶 S/M/L', price: 'NT 790', img: 'img/product-14.jpg', url: 'product.html' },
@@ -50,21 +46,75 @@ const inspirationData = {
 // 2. JavaScript 程式邏輯
 // -----------------------------------------------------------------
 
-// 確保網頁 DOM 載入完成後才執行
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================================
-  // (A) 首頁專屬：靈感 Tab 切換
+  // (F) 側邊欄選單功能 (多內容切換版)
+  // ==========================================================
+
+  const menuTriggers = document.querySelectorAll('.menu-trigger'); // 抓取所有有 class="menu-trigger" 的連結
+  const sidebarNav = document.getElementById('sidebar-nav');
+  const sidebarOverlay = document.getElementById('sidebar-overlay');
+  const closeBtn = document.getElementById('close-btn');
+  const submenuToggles = document.querySelectorAll('.submenu-toggle');
+  const allMenuContents = document.querySelectorAll('.menu-content'); // 抓取所有側邊欄內容區塊
+
+  // 1. 點擊 Header 上的任一按鈕
+  if (menuTriggers.length > 0 && sidebarNav && sidebarOverlay) {
+    menuTriggers.forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault(); // 阻止連結跳轉
+
+        // (A) 先取得這個按鈕對應的 menu id (例如 menu-inspiration)
+        const targetMenuId = trigger.getAttribute('data-menu');
+
+        // (B) 隱藏所有側邊欄內容
+        allMenuContents.forEach(content => {
+          content.classList.remove('active');
+        });
+
+        // (C) 顯示對應的內容
+        const targetContent = document.getElementById(targetMenuId);
+        if (targetContent) {
+          targetContent.classList.add('active');
+        }
+
+        // (D) 打開側邊欄
+        sidebarNav.classList.add('active');
+        sidebarOverlay.classList.add('active');
+      });
+    });
+  }
+
+  // 2. 關閉側邊欄
+  function closeSidebar() {
+    if (sidebarNav && sidebarOverlay) {
+      sidebarNav.classList.remove('active');
+      sidebarOverlay.classList.remove('active');
+    }
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+  if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+
+  // 3. 子選單手風琴效果 (保持不變)
+  submenuToggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const parentLi = toggle.parentElement;
+      parentLi.classList.toggle('open');
+    });
+  });
+
+
+  // ==========================================================
+  // (A) 首頁專屬：靈感 Tab 切換 (如果有需要保留的話)
   // ==========================================================
   const navLinks = document.querySelectorAll('.inspiration-promo-nav a[data-tab]');
   const mainImage = document.querySelector('.inspiration-main-image img');
   const productGrid = document.querySelector('.inspiration .product-grid');
 
-  // 替換商品網格內容的函式
   function updateProductGrid(products) {
-    // 1. 清空目前的商品
     productGrid.innerHTML = '';
-    // 2. 迴圈讀取
     products.forEach(product => {
       const productCardHTML = `
                 <div class="product-card">
@@ -82,17 +132,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // *** 這是關鍵修正 ***
-  // 只有當 `navLinks`, `mainImage`, `productGrid` 都存在時 (亦即在 index.html)，才執行
   if (navLinks.length > 0 && mainImage && productGrid) {
-
-    // 幫每個導覽連結加上點擊事件
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const tabId = link.dataset.tab;
         const data = inspirationData[tabId];
-
         if (data) {
           document.querySelector('.inspiration-promo-nav li.active').classList.remove('active');
           link.parentElement.classList.add('active');
@@ -103,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // 手動初始化，載入預設(NEW IN)的內容
     const defaultTabId = 'new-in';
     const defaultData = inspirationData[defaultTabId];
     if (defaultData) {
@@ -115,11 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================================
-  // (B) 首頁專屬：無限滾動
+  // (B) 無限滾動動畫
   // ==========================================================
   function setupInfiniteScroll(containerSelector, direction) {
     const carouselContainer = document.querySelector(containerSelector);
-    // (防護罩) 如果在其他頁面找不到此元素，就直接退出
     if (!carouselContainer) return;
 
     const carouselTrack = carouselContainer.querySelector('.carousel-track');
@@ -153,86 +196,57 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(styleSheet);
   }
 
-  // 呼叫設定函式
   setupInfiniteScroll('.carousel-horizontal', 'horizontal');
   setupInfiniteScroll('.carousel-vertical-grid', 'vertical');
 
 
   // ==========================================================
-  // (C) 商品頁專屬：手風琴 (Accordion)
+  // (C) 商品頁手風琴 (Accordion)
   // ==========================================================
   const accordionItems = document.querySelectorAll('.product-accordion .accordion-item');
-
-  // (防護罩) 只有在找到手風琴項目時才執行
   if (accordionItems.length > 0) {
     accordionItems.forEach(item => {
       const header = item.querySelector('.accordion-header');
-
       header.addEventListener('click', () => {
-        if (header.id === 'open-size-chart-modal') {
-          return; // 結束，不執行下面的程式碼
-        }
+        if (header.id === 'open-size-chart-modal') return;
         const isActive = item.classList.contains('active');
-        accordionItems.forEach(otherItem => {
-          otherItem.classList.remove('active');
-        });
-        if (!isActive) {
-          item.classList.add('active');
-        }
+        accordionItems.forEach(otherItem => otherItem.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
       });
     });
   }
 
 
   // ==========================================================
-  // (NEW) 商品頁專屬：尺寸表 Modal
+  // (NEW) 尺寸表 Modal
   // ==========================================================
   const sizeChartModal = document.getElementById('size-chart-modal');
   const openSizeChartButton = document.getElementById('open-size-chart-modal');
   const closeSizeChartButton = document.getElementById('close-size-chart-modal');
 
-  // (防護罩)
   if (sizeChartModal && openSizeChartButton && closeSizeChartButton) {
-
-    // 1. 點擊「尺寸表」按鈕
     openSizeChartButton.addEventListener('click', (e) => {
       e.preventDefault();
       sizeChartModal.classList.add('active');
     });
-
-    // 2. 點擊 "X" 關閉
     closeSizeChartButton.addEventListener('click', () => {
       sizeChartModal.classList.remove('active');
     });
-
-    // 3. 點擊背景遮罩關閉
     sizeChartModal.addEventListener('click', (e) => {
-      // 確保點擊的是遮罩本身，而不是裡面的內容
       if (e.target === sizeChartModal) {
         sizeChartModal.classList.remove('active');
       }
     });
   }
 
-  // ==========================================================
-  // (D) 商品頁專屬：選項 (Option Selection)
-  // ==========================================================
 
-  /**
-   * 輔助函式：處理選項群組的 "active" 狀態
-   * @param {string} containerSelector - 包含選項的父層容器 (e.g., '.size-options')
-   * @param {string} buttonSelector - 可點擊的選項 (e.g., 'button')
-   */
+  // ==========================================================
+  // (D) 商品頁選項 (Option Selection)
+  // ==========================================================
   function handleOptionSelection(containerSelector, buttonSelector) {
     const container = document.querySelector(containerSelector);
-
-    // (防護罩) 如果在其他頁面找不到此元素，就直接退出
-    if (!container) {
-      return;
-    }
-
+    if (!container) return;
     const buttons = container.querySelectorAll(buttonSelector);
-
     buttons.forEach(button => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
@@ -245,20 +259,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const colorSwatches = document.querySelectorAll('.color-swatches .swatch');
   const gallerySets = document.querySelectorAll('.product-gallery-stack .gallery-images-set');
 
-// (防護罩) 只有在 product.html 頁面才執行
   if (colorSwatches.length > 0 && gallerySets.length > 0) {
     colorSwatches.forEach(swatch => {
       swatch.addEventListener('click', (e) => {
         e.preventDefault();
-
-        // 1. 取得要顯示的顏色 (e.g., "black")
         const targetColor = swatch.dataset.color;
-
-        // 2. 更新按鈕的 active 狀態
         colorSwatches.forEach(s => s.classList.remove('active'));
         swatch.classList.add('active');
-
-        // 3. 更新大圖的 active 狀態
         gallerySets.forEach(set => {
           if (set.dataset.colorGallery === targetColor) {
             set.classList.add('active');
@@ -270,25 +277,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 呼叫函式，分別套用在您
-  handleOptionSelection('.size-options', 'button');         // 2. 尺寸群組
-  handleOptionSelection('.availability-tabs', 'button');  // 3. 官網/店鋪群組
+  handleOptionSelection('.size-options', 'button');
+  handleOptionSelection('.availability-tabs', 'button');
 
 
   // ==========================================================
-  // (E) 首頁專屬：滾動觸發式廣告
+  // (E) 滾動觸發式廣告
   // ==========================================================
   const stickyAd = document.getElementById('sticky-ad-banner');
   const inspirationSection = document.getElementById('inspiration-section');
 
-  // (防護罩) 只有在*同時*找到廣告 和 *首頁觸發區塊* 時才執行
   if (stickyAd && inspirationSection) {
-
-    const observerOptions = {
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
+    const observerOptions = { rootMargin: '0px', threshold: 0.1 };
     const adObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -297,8 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, observerOptions);
-
     adObserver.observe(inspirationSection);
   }
 
-}); // DOMContentLoaded 結束
+}); // DOMContentLoaded End
