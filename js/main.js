@@ -105,6 +105,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ==========================================================
+  // (NEW) 編輯精選：穿搭 Lookbook 切換功能
+  // ==========================================================
+  const lookbookItems = document.querySelectorAll('.lookbook-item');
+  const productGroups = document.querySelectorAll('.product-group');
+
+  if (lookbookItems.length > 0) {
+    lookbookItems.forEach(item => {
+      item.addEventListener('click', function() {
+        // 1. 取得目標 ID
+        const targetId = this.getAttribute('data-target');
+        if (!targetId) return;
+
+        // 2. 切換上方選單的 active 樣式
+        lookbookItems.forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+
+        // 3. 切換下方商品的 active 樣式
+        productGroups.forEach(group => {
+          group.classList.remove('active');
+          if (group.id === targetId) {
+            group.classList.add('active');
+          }
+        });
+
+        // 4. (選優) 點擊後自動將該項目捲動到中間 (適合手機板)
+        this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      });
+    });
+  }
+
 
   // ==========================================================
   // (A) 首頁專屬：靈感 Tab 切換 (如果有需要保留的話)
@@ -113,21 +144,52 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainImage = document.querySelector('.inspiration-main-image img');
   const productGrid = document.querySelector('.inspiration .product-grid');
 
+  // 在 main.js 中找到這個函式並覆蓋
   function updateProductGrid(products) {
-    productGrid.innerHTML = '';
+    // 1. 找到要插入商品的容器 (對應您 HTML 中的 product-group)
+    // 注意：這裡假設您已經有邏輯去抓取當前 active 的 group，或者您可以直接清空並重繪
+    // 為了配合您目前的架構，這裡示範如何生成符合新排版的 HTML 字串
+
+    const productGrid = document.querySelector('.product-group.active');
+    // 如果您的邏輯是每次切換都清空重繪，請確保選對容器
+
+    if (!productGrid) return;
+
+    productGrid.innerHTML = ''; // 清空舊內容
+
     products.forEach(product => {
+      // 確保資料庫有這些欄位，若無則顯示預設值避免報錯
+      const name = product.name || '商品名稱';
+      const price = product.price || '0';
+      const modelId = product.modelId || '00000000'; // 型號
+      const weight = product.weight || '0g';        // 重量
+      const sales = product.sales || '已銷售0件';    // 銷售
+
       const productCardHTML = `
-                <div class="product-card">
-                    <a href="${product.url}">
-                        <img src="${product.img}" alt="${product.name}" class="placeholder">
-                        <div class="product-info">
-                            <p class="product-name">${product.name}</p>
-                            <p class="product-price">${product.price}</p>
-                        </div>
-                    </a>
-                    <a href="#" class="shop-btn">SHOP</a>
-                </div>
-            `;
+      <div class="product-card">
+          <a href="${product.url || '#'}">
+              <img src="${product.img}" alt="${name}">
+
+              <div class="custom-product-info">
+
+                  <h3 class="cp-name">${name}</h3>
+
+                  <div class="cp-meta-row">
+                      <div class="cp-meta-left">
+                          <span class="cp-id">${modelId}</span>
+                          <span class="cp-weight">${weight}</span>
+                      </div>
+                      <span class="cp-sales">${sales}</span>
+                  </div>
+
+                  <div class="cp-price-row">
+                      NT. ${price}
+                  </div>
+
+              </div>
+          </a>
+      </div>
+    `;
       productGrid.insertAdjacentHTML('beforeend', productCardHTML);
     });
   }
@@ -197,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   setupInfiniteScroll('.carousel-horizontal', 'horizontal');
-  setupInfiniteScroll('.carousel-vertical-grid', 'vertical');
+  // setupInfiniteScroll('.carousel-vertical-grid', 'vertical');
 
 
   // ==========================================================

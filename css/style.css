@@ -54,6 +54,28 @@ img.placeholder {
   transition: background 0.3s ease;
 }
 
+.main-header2 {
+  position: absolute; /* 讓 Header 懸浮在 Hero 圖片之上 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* 確保在最上層 */
+  padding: 25px 0; /* 增加上下留白，更有質感 */
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+/* Header 專用的 Container 設定：改為垂直排列 */
+.main-header2 .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column; /* 垂直堆疊：上層 Logo，下層選單 */
+  align-items: center;    /* 讓內容水平置中 */
+  position: relative;     /* 作為定位基準 */
+}
+
 /* Header 專用的 Container 設定：改為垂直排列 */
 .main-header .container {
   max-width: 1200px;
@@ -413,6 +435,7 @@ img.placeholder {
   align-items: baseline;
   gap: 20px;
   margin-bottom: 30px;
+  margin-left: 60px;
 }
 .editor-pick-header h2 {
   font-size: 24px;
@@ -579,6 +602,7 @@ img.placeholder {
   align-items: baseline;
   gap: 20px;
   margin-bottom: 30px;
+  margin-left: 60px;
 }
 .life-store-header h2 {
   font-size: 24px;
@@ -655,7 +679,7 @@ img.placeholder {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 50px;
-  margin: 40px 0;
+  margin: 40px ;
   align-items: start;
 }
 .product-gallery-stack img {
@@ -1045,7 +1069,7 @@ img.placeholder {
   /* ★ 關鍵修改 3：設定間距 (Gap) */
   /* 如果你想要完全無縫貼齊，設為 0 */
   /* 如果你想要像參考圖那樣有一點白色縫隙，設為 10px 或 20px */
-  gap: 0px;
+  gap: 0;
 }
 
 .inspiration-item {
@@ -1292,4 +1316,184 @@ img.placeholder {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* 上方選單樣式 */
+.lookbook-carousel {
+  overflow-x: auto;
+  padding: 20px 0;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.lookbook-item {
+  display: inline-block;
+  width: 200px; /* 小圖寬度 */
+  margin: 0 10px;
+  opacity: 0.5; /* 非選中時變淡 */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  vertical-align: middle;
+}
+
+.lookbook-item.active {
+  opacity: 1;
+  transform: scale(1.1); /* 選中時稍微放大，模擬圖片中間大的效果 */
+}
+
+.lookbook-item img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+/* 下方商品區樣式 */
+.product-display-area {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.product-group {
+  display: none; /* 預設全部隱藏 */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-group.active {
+  display: grid; /* 只有 active 的會顯示 */
+}
+
+.product-card {
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* =========================================
+   --- 內頁專用設定 (Inner Page) ---
+   適用於：商品詳情頁、結帳頁等沒有 Hero Banner 的頁面
+   ========================================= */
+
+/* 1. 把內容往下推，預留空間給 Header */
+body.inner-page {
+  /* 數值可依你的 Header 高度微調 (目前預估 140px 剛好) */
+  padding-top: 140px;
+  background-color: #fff;
+}
+
+/* 2. 內頁 Header 設定 */
+body.inner-page .main-header {
+  /* 維持透明背景 (如果你希望內頁 Header 是白底，改成 #fff) */
+  background: transparent;
+
+  /* 內頁通常不需要上面的黑色漸層，建議移除，改用 none */
+  background: none;
+}
+
+/* 3. 讓 Logo 和 Icon 變回「黑色」 (原本有 filter: invert 轉白) */
+body.inner-page .logo img,
+body.inner-page .header-icons li a img {
+  filter: none !important; /* 移除反白濾鏡 */
+}
+
+/* 4. 讓導覽列文字變回「黑色」 */
+body.inner-page .main-nav a {
+  color: #333 !important; /* 深黑色 */
+  text-shadow: none;      /* 移除陰影 */
+}
+
+/* 滑鼠移過去的底線顏色也要變黑 */
+body.inner-page .main-nav a:hover {
+  border-bottom-color: #333;
+}
+
+/* 5. 讓 SHOP / MENU 按鈕文字與線條變黑 */
+body.inner-page .menu-trigger {
+  color: #333 !important;
+}
+
+/* 商品資訊容器 */
+.product-info-container {
+  padding: 10px 0;
+  text-align: left;
+  color: #000;
+}
+
+/* 第一行：名稱 */
+.row-1 .product-name {
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+/* 第二行：分配銷售、型號與重量 */
+.row-2 {
+  display: flex;
+  justify-content: space-between; /* 讓左邊與右邊群組分開 */
+  align-items: center;
+  font-size: 0.85rem;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+/* 讓型號與重量靠右排列 */
+.detail-group {
+  display: flex;
+  gap: 10px; /* 型號與重量的間距 */
+}
+
+/* 第三行：價格靠右 */
+.row-3 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+/* --- 下方商品區縮小 --- */
+
+/* 1. 限制商品列表的總寬度 */
+.product-group {
+  display: none;
+  grid-template-columns: repeat(3, 1fr); /* 維持三欄 */
+  gap: 30px;            /* 欄位間距 */
+  max-width: 900px;     /* ★關鍵：限制最大寬度 (原本可能沒設或1200px)，改小讓圖片變小 */
+  margin: 0 auto 0;  /* 上方留白 40px，左右置中 */
+}
+
+.product-group.active {
+  display: grid;
+}
+
+/* 2. 微調文字大小 (比剛才稍微縮小一點，配合變小的圖片) */
+.custom-product-info {
+  padding: 10px 0;
+  text-align: left;
+}
+
+.custom-product-info .cp-name {
+  font-size: 1rem;       /* 原本 1.1rem -> 改 1rem */
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.custom-product-info .cp-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;    /* 原本 0.9rem -> 改 0.85rem */
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.custom-product-info .cp-price-row {
+  font-size: 1.6rem;     /* 原本 2rem -> 改 1.6rem (視覺上還是大字，但不會太搶戲) */
+  font-weight: 400;
+  letter-spacing: 0.5px;
 }
