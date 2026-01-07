@@ -1,4 +1,4 @@
-/* styles.css */
+/* styles.css - 整理與修復版 */
 
 html {
   scroll-behavior: smooth;
@@ -40,44 +40,37 @@ img.placeholder {
 }
 
 /* =========================================
-   --- 頁首 (Header) - Queen Shop 風格改版 ---
+   --- 頁首 (Header) ---
+   保留原本兩種 Header 設定，避免跑版
    ========================================= */
 
+/* 樣式 1: 帶有黑色漸層背景 (首頁用) */
 .main-header {
-  position: absolute; /* 讓 Header 懸浮在 Hero 圖片之上 */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000; /* 確保在最上層 */
-  padding: 25px 0; /* 增加上下留白，更有質感 */
+  z-index: 1000;
+  padding: 25px 0;
   background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
   transition: background 0.3s ease;
 }
 
+/* 樣式 2: 完全透明背景 */
 .main-header2 {
-  position: absolute; /* 讓 Header 懸浮在 Hero 圖片之上 */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000; /* 確保在最上層 */
-  padding: 25px 0; /* 增加上下留白，更有質感 */
+  z-index: 1000;
+  padding: 25px 0;
   background: transparent;
   transition: background 0.3s ease;
 }
 
-/* Header 專用的 Container 設定：改為垂直排列 */
+/* Header Container 設定 */
+.main-header .container,
 .main-header2 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column; /* 垂直堆疊：上層 Logo，下層選單 */
-  align-items: center;    /* 讓內容水平置中 */
-  position: relative;     /* 作為定位基準 */
-}
-
-/* Header 專用的 Container 設定：改為垂直排列 */
-.main-header .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
@@ -98,11 +91,10 @@ img.placeholder {
 }
 
 .logo img {
-  height: 45px; /* Logo 大小，可依需求微調 */
+  height: 45px;
   width: auto;
   display: block;
-  /* ★重要：如果你的 Logo 原本是黑色，這行會把它轉成白色。如果是白色圖檔請刪除這行 */
-  filter: invert(1) brightness(200%);
+  filter: invert(1) brightness(200%); /* 轉為白色 */
 }
 
 /* Icons 強制定位在 Container 的「最右側」 */
@@ -115,38 +107,37 @@ img.placeholder {
 
 .header-icons ul {
   display: flex;
-  gap: 20px; /* Icon 之間的間距 */
+  gap: 20px;
   align-items: center;
 }
 
 .header-icons li a img {
-  height: 22px; /* Icon 大小 */
+  height: 22px;
   width: auto;
   display: block;
-  /* ★重要：如果你的 Icon 原本是黑色，這行會把它轉成白色 */
-  filter: invert(1) brightness(200%);
+  filter: invert(1) brightness(200%); /* 轉為白色 */
 }
 
 /* --- 第二層：導覽列 (Nav) --- */
 .main-nav ul {
   display: flex;
-  justify-content: center; /* 選單置中 */
-  gap: 40px; /* 選單項目的間距寬一點，較有時尚感 */
+  justify-content: center;
+  gap: 40px;
 }
 
 .main-nav a {
   font-size: 15px;
   color: #fff; /* 強制白色文字 */
   font-weight: 500;
-  letter-spacing: 1.5px; /* 字距加寬 */
+  letter-spacing: 1.5px;
   padding-bottom: 5px;
-  border-bottom: 1px solid transparent; /* 預留底線位置 */
+  border-bottom: 1px solid transparent;
   transition: all 0.3s ease;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3); /* 加一點點陰影確保在淺色背景也能看見 */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .main-nav a:hover {
-  border-bottom: 1px solid #fff; /* 滑鼠移過去顯示白色底線 */
+  border-bottom: 1px solid #fff;
   opacity: 0.9;
 }
 
@@ -157,10 +148,10 @@ img.placeholder {
     margin-bottom: 0;
   }
   .logo img {
-    height: 30px; /* 手機版 Logo 縮小 */
+    height: 30px;
   }
   .main-nav {
-    display: none; /* 手機版隱藏選單 (未來可改漢堡選單) */
+    display: none; /* 手機版隱藏桌面選單 */
   }
   .header-icons {
     position: static; /* 取消絕對定位，讓它自然排列 */
@@ -295,9 +286,9 @@ img.placeholder {
 .hero {
   position: relative;
   text-align: center;
-  height: 100vh; /* 滿版高度 */
+  height: 100vh;
   width: 100%;
-  margin-top: 0; /* 確保從頂端開始 */
+  margin-top: 0;
   overflow: hidden;
 }
 
@@ -313,33 +304,26 @@ img.placeholder {
   bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
-
-  /* 大小與字體設定 (維持原樣) */
   padding: 14px 32px;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 1px;
-
-  /* --- 顏色修改重點 --- */
-  background-color: transparent; /* 背景透明 */
-  color: #fff;                   /* 文字改成白色 */
-  border: 2px solid #fff;        /* 邊框改成白色 (線框) */
-
-  transition: all 0.3s ease;     /* 加入滑順動畫 */
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  transition: all 0.3s ease;
 }
 
-/* 滑鼠移上去的效果 (Hover) */
 .hero .btn:hover {
-  background-color: #fff; /* 背景變成白色 */
-  color: #333;            /* 文字變成深色 */
-  border-color: #fff;     /* 邊框保持白色 */
+  background-color: #fff;
+  color: #333;
+  border-color: #fff;
 }
 
 /* --- (Page 1) Sections --- */
 .section {
   margin-bottom: 60px;
 }
-
 
 .inspiration-header {
   display: flex;
@@ -403,12 +387,8 @@ img.placeholder {
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.inspiration-promo-nav li:first-child a {
-  font-weight: 700;
-}
-.inspiration-promo-nav li.active a {
-  font-weight: 700;
-}
+.inspiration-promo-nav li:first-child a { font-weight: 700; }
+.inspiration-promo-nav li.active a { font-weight: 700; }
 
 .inspiration-promo-nav a:hover::after,
 .inspiration-promo-nav li.active a::after {
@@ -474,9 +454,7 @@ img.placeholder {
   height: 400px;
   margin-right: 20px;
 }
-.carousel-horizontal .carousel-track img:last-child {
-  margin-right: 0;
-}
+.carousel-horizontal .carousel-track img:last-child { margin-right: 0; }
 
 .carousel-vertical-grid {
   overflow: hidden;
@@ -1054,21 +1032,13 @@ img.placeholder {
   height: auto;
   object-fit: cover;
 }
-/* --- 首頁：探索本週靈感 4格圖片排版 (滿版無縫風格) --- */
 
+/* --- 首頁：探索本週靈感 4格圖片排版 (滿版無縫風格) --- */
 .inspiration-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2x2 排列 */
-
-  /* ★ 關鍵修改 1：移除 margin-top，讓它向上貼齊 Hero Banner */
   margin-top: 0;
-
-  /* ★ 關鍵修改 2：設定寬度 100%，確保左右填滿螢幕 */
   width: 100%;
-
-  /* ★ 關鍵修改 3：設定間距 (Gap) */
-  /* 如果你想要完全無縫貼齊，設為 0 */
-  /* 如果你想要像參考圖那樣有一點白色縫隙，設為 10px 或 20px */
   gap: 0;
 }
 
@@ -1077,15 +1047,13 @@ img.placeholder {
   position: relative;
   overflow: hidden;
   width: 100%;
-
-  /* 保持正方形比例 (如果你希望圖片扁一點，可以改成 16/9) */
   aspect-ratio: 1 / 1;
 }
 
 .inspiration-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 填滿格子 */
+  object-fit: cover;
   display: block;
   transition: transform 0.6s ease;
 }
@@ -1098,7 +1066,7 @@ img.placeholder {
 /* RWD 手機版：變成垂直排列 */
 @media (max-width: 768px) {
   .inspiration-grid {
-    grid-template-columns: 1fr; /* 改成一欄 */
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1124,7 +1092,6 @@ img.placeholder {
   background-color: #fff;
   margin-bottom: 4px; /* 漢堡線條間距 */
 }
-/* 讓漢堡圖示排成三條線 */
 .menu-btn span:not(.menu-text) {
   display: block; /* 確保線條顯示 */
 }
@@ -1249,46 +1216,6 @@ img.placeholder {
   color: #d00 !important;
 }
 
-/* --- Header 5個文字按鈕樣式 --- */
-.main-nav {
-  width: 100%;
-  margin-top: 10px; /* 與 Logo 保持一點距離 */
-}
-
-.main-nav ul {
-  display: flex;
-  justify-content: center; /* 水平置中 */
-  gap: 40px; /* 按鈕之間的間距 */
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.main-nav li a {
-  text-decoration: none;
-  font-size: 15px;
-  color: #fff; /* ★ 強制白色文字 (因為背景是黑漸層) */
-  font-weight: 500;
-  letter-spacing: 1.5px;
-  padding-bottom: 5px;
-  border-bottom: 2px solid transparent; /* 預留底線位置 */
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-/* 滑鼠移過去的特效 */
-.main-nav li a:hover {
-  border-bottom: 2px solid #fff; /* 出現白色底線 */
-  opacity: 1;
-}
-
-/* 手機版隱藏這五個字 (手機版通常還是需要漢堡選單，這裡先隱藏) */
-@media (max-width: 768px) {
-  .main-nav {
-    display: none;
-  }
-}
-
 /* --- 側邊欄多內容切換 --- */
 
 /* 1. 預設隱藏所有內容列表 */
@@ -1318,19 +1245,18 @@ img.placeholder {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* 上方選單樣式 */
 .lookbook-carousel {
-  overflow-x: auto;
-  padding: 20px 0;
-  white-space: nowrap;
-  text-align: center;
+  width: 100%;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  overflow: hidden;
 }
 
 .lookbook-item {
   display: inline-block;
-  width: 200px; /* 小圖寬度 */
+  width: 200px;
   margin: 0 10px;
-  opacity: 0.5; /* 非選中時變淡 */
+  opacity: 0.5;
   cursor: pointer;
   transition: all 0.3s ease;
   vertical-align: middle;
@@ -1338,7 +1264,7 @@ img.placeholder {
 
 .lookbook-item.active {
   opacity: 1;
-  transform: scale(1.1); /* 選中時稍微放大，模擬圖片中間大的效果 */
+  transform: scale(1.1);
 }
 
 .lookbook-item img {
@@ -1380,30 +1306,26 @@ img.placeholder {
 
 /* 1. 把內容往下推，預留空間給 Header */
 body.inner-page {
-  /* 數值可依你的 Header 高度微調 (目前預估 140px 剛好) */
   padding-top: 140px;
   background-color: #fff;
 }
 
 /* 2. 內頁 Header 設定 */
 body.inner-page .main-header {
-  /* 維持透明背景 (如果你希望內頁 Header 是白底，改成 #fff) */
   background: transparent;
-
-  /* 內頁通常不需要上面的黑色漸層，建議移除，改用 none */
   background: none;
 }
 
-/* 3. 讓 Logo 和 Icon 變回「黑色」 (原本有 filter: invert 轉白) */
+/* 3. 讓 Logo 和 Icon 變回「黑色」 */
 body.inner-page .logo img,
 body.inner-page .header-icons li a img {
-  filter: none !important; /* 移除反白濾鏡 */
+  filter: none !important;
 }
 
 /* 4. 讓導覽列文字變回「黑色」 */
 body.inner-page .main-nav a {
-  color: #333 !important; /* 深黑色 */
-  text-shadow: none;      /* 移除陰影 */
+  color: #333 !important;
+  text-shadow: none;
 }
 
 /* 滑鼠移過去的底線顏色也要變黑 */
@@ -1433,17 +1355,16 @@ body.inner-page .menu-trigger {
 /* 第二行：分配銷售、型號與重量 */
 .row-2 {
   display: flex;
-  justify-content: space-between; /* 讓左邊與右邊群組分開 */
+  justify-content: space-between;
   align-items: center;
   font-size: 0.85rem;
   color: #333;
   margin-bottom: 12px;
 }
 
-/* 讓型號與重量靠右排列 */
 .detail-group {
   display: flex;
-  gap: 10px; /* 型號與重量的間距 */
+  gap: 10px;
 }
 
 /* 第三行：價格靠右 */
@@ -1456,29 +1377,28 @@ body.inner-page .menu-trigger {
   font-size: 1.5rem;
   font-weight: 500;
 }
-/* --- 下方商品區縮小 --- */
 
-/* 1. 限制商品列表的總寬度 */
+/* --- 下方商品區縮小 --- */
 .product-group {
   display: none;
-  grid-template-columns: repeat(3, 1fr); /* 維持三欄 */
-  gap: 30px;            /* 欄位間距 */
-  max-width: 900px;     /* ★關鍵：限制最大寬度 (原本可能沒設或1200px)，改小讓圖片變小 */
-  margin: 0 auto 0;  /* 上方留白 40px，左右置中 */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto 0;
 }
 
 .product-group.active {
   display: grid;
 }
 
-/* 2. 微調文字大小 (比剛才稍微縮小一點，配合變小的圖片) */
+/* 微調文字大小 */
 .custom-product-info {
   padding: 10px 0;
   text-align: left;
 }
 
 .custom-product-info .cp-name {
-  font-size: 1rem;       /* 原本 1.1rem -> 改 1rem */
+  font-size: 1rem;
   font-weight: 500;
   margin-bottom: 5px;
 }
@@ -1487,13 +1407,189 @@ body.inner-page .menu-trigger {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.85rem;    /* 原本 0.9rem -> 改 0.85rem */
+  font-size: 0.85rem;
   color: #555;
   margin-bottom: 10px;
 }
 
 .custom-product-info .cp-price-row {
-  font-size: 1.6rem;     /* 原本 2rem -> 改 1.6rem (視覺上還是大字，但不會太搶戲) */
+  font-size: 1.6rem;
   font-weight: 400;
   letter-spacing: 0.5px;
+}
+
+.swiper-slide {
+  width: 160px !important;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  transform: scale(0.85);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* --- 選中的那一張 (Active) --- */
+.swiper-slide-active {
+  opacity: 1;
+  transform: scale(1.2);
+  z-index: 10;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* RWD 手機版調整 */
+@media (max-width: 768px) {
+  .swiper-slide {
+    width: 140px !important;
+  }
+}
+
+/* 預設桌機版不顯示這個按鈕 */
+.mobile-menu-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
+  }
+
+  .mobile-menu-btn span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 2px;
+  }
+
+  body.inner-page .mobile-menu-btn span {
+    background-color: #333;
+  }
+
+  .header-top {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-group {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0 15px;
+  }
+
+  .custom-product-info .cp-name {
+    font-size: 13px;
+  }
+  .custom-product-info .cp-price-row {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .editor-pick-header,
+  .life-store-header {
+    margin-left: 0;
+    padding: 0 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .editor-pick-header h2,
+  .life-store-header h2 {
+    font-size: 20px;
+  }
+
+  .editor-pick-header p,
+  .life-store-header p {
+    font-size: 13px;
+  }
+
+  .life-store-banner .btn {
+    bottom: 20px;
+    padding: 10px 20px;
+    font-size: 13px;
+    width: 80%;
+  }
+}
+
+/* =========================================
+   ★ 重要修正區：解決主選單在電腦版顯示問題
+   ========================================= */
+
+/* 1. 電腦版 (預設)：強制隱藏手機專用的選單與按鈕 */
+#menu-mobile-main,
+.back-to-main {
+  display: none !important;
+}
+
+/* 2. 手機版 (768px以下)：才允許顯示 */
+@media (max-width: 768px) {
+
+  /* 當選單被加上 active 時顯示 (搭配 JS) */
+  #menu-mobile-main.active {
+    display: block !important;
+  }
+
+  /* 顯示返回主選單按鈕 */
+  .back-to-main {
+    display: block !important;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f8f8;
+  }
+
+  .back-to-main .main-link {
+    font-size: 14px;
+    padding: 15px 20px;
+    color: #555;
+    font-weight: bold;
+  }
+}
+
+/* 3. 美化手機版主選單樣式 */
+.mobile-nav-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  font-size: 15px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid #f5f5f5;
+  transition: background 0.2s;
+}
+
+.mobile-nav-link:hover {
+  background-color: #f9f9f9;
+}
+
+.mobile-nav-link[style*="color: #d00"] {
+  font-weight: bold;
 }

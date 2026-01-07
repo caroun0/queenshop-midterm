@@ -49,6 +49,67 @@ const inspirationData = {
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================================
+// (NEW) 手機版漢堡選單邏輯 (修正版)
+// ==========================================================
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+  const backButtons = document.querySelectorAll('.back-to-main');
+
+// 1. 點擊漢堡按鈕 -> 打開側邊欄，並顯示「主目錄」
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // 隱藏所有子選單
+      document.querySelectorAll('.menu-content').forEach(c => c.classList.remove('active'));
+
+      // 只顯示手機主目錄
+      const mobileMenu = document.getElementById('menu-mobile-main');
+      if (mobileMenu) mobileMenu.classList.add('active');
+
+      // 打開側邊欄
+      const sidebarNav = document.getElementById('sidebar-nav');
+      const sidebarOverlay = document.getElementById('sidebar-overlay');
+      sidebarNav.classList.add('active');
+      sidebarOverlay.classList.add('active');
+    });
+  }
+
+// 2. 點擊主目錄裡的選項 -> 切換到對應的子選單
+  if (mobileNavLinks.length > 0) {
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('data-target');
+
+        // 隱藏主目錄
+        document.getElementById('menu-mobile-main').classList.remove('active');
+
+        // 顯示目標子選單
+        const targetContent = document.getElementById(targetId);
+        if (targetContent) {
+          targetContent.classList.add('active');
+        }
+      });
+    });
+  }
+
+// 3. 點擊「返回主選單」 -> 回到主目錄
+  if (backButtons.length > 0) {
+    backButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // 隱藏目前所在的子選單
+        const parentUl = btn.closest('.menu-content');
+        parentUl.classList.remove('active');
+
+        // 重新顯示主目錄
+        const mobileMenu = document.getElementById('menu-mobile-main');
+        if (mobileMenu) mobileMenu.classList.add('active');
+      });
+    });
+  }
+
+  // ==========================================================
   // (F) 側邊欄選單功能 (多內容切換版)
   // ==========================================================
 
@@ -106,33 +167,73 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================================
-  // (NEW) 編輯精選：穿搭 Lookbook 切換功能
+  // (NEW) 編輯精選：穿搭 Lookbook (無警告修正版)
   // ==========================================================
-  const lookbookItems = document.querySelectorAll('.lookbook-item');
-  const productGroups = document.querySelectorAll('.product-group');
 
-  if (lookbookItems.length > 0) {
-    lookbookItems.forEach(item => {
-      item.addEventListener('click', function() {
-        // 1. 取得目標 ID
-        const targetId = this.getAttribute('data-target');
-        if (!targetId) return;
+  // 1. 初始化 Swiper (移除 var lookbookSwiper =)
+  new Swiper(".mySwiper", {
+    // 基礎設定
+    effect: "slide",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
 
-        // 2. 切換上方選單的 active 樣式
-        lookbookItems.forEach(i => i.classList.remove('active'));
-        this.classList.add('active');
+    // Loop 設定
+    loop: true,
+    loopedSlides: 7,
+    loopAdditionalSlides: 3,
 
-        // 3. 切換下方商品的 active 樣式
-        productGroups.forEach(group => {
-          group.classList.remove('active');
-          if (group.id === targetId) {
-            group.classList.add('active');
-          }
-        });
+    // 觀察器設定
+    observer: true,
+    observeParents: true,
 
-        // 4. (選優) 點擊後自動將該項目捲動到中間 (適合手機板)
-        this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      });
+    spaceBetween: 0,
+    slideToClickedSlide: true,
+
+    // 事件監聽
+    on: {
+      // 若編輯器仍跳警告，請忽略，這是 Swiper 必要的標準寫法
+      "slideChangeTransitionEnd": function () {
+        // 使用 this 關鍵字來操作當前的 swiper，不需要外部變數
+        var index = this.realIndex;
+
+        var currentNum = (index % 10) + 1;
+        var formattedNum = currentNum < 10 ? '0' + currentNum : currentNum;
+        var targetId = 'look-' + formattedNum;
+
+        updateProductGroup(targetId);
+      },
+
+      "init": function() {
+        setTimeout(function(){
+          updateProductGroup('look-01');
+        }, 100);
+      }
+    }
+  });
+
+  // 下方商品切換函式
+  function updateProductGroup(targetId) {
+    if (!targetId) return;
+
+    const targetGroup = document.getElementById(targetId);
+
+    if (!targetGroup) {
+      // 註解掉 console.warn 以保持控制台乾淨，除非需要除錯
+      // console.warn('找不到對應的商品區塊 ID:', targetId);
+      return;
+    }
+
+    const allGroups = document.querySelectorAll('.product-group');
+    allGroups.forEach(function(group) {
+      group.classList.remove('active');
+      group.style.opacity = 0;
+    });
+
+    targetGroup.classList.add('active');
+
+    requestAnimationFrame(function() {
+      targetGroup.style.opacity = 1;
     });
   }
 

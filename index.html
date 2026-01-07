@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QUEEN SHOP - 首頁</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
 
@@ -15,6 +16,12 @@
       <a href="index.html" class="logo">
         <img src="img/logo.svg" alt="QUEEN SHOP">
       </a>
+
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
       <div class="header-icons">
         <ul>
@@ -83,36 +90,66 @@
         <p>實穿中獲取搭配靈感，一鍵擁有整套風格。</p>
       </div>
 
-      <div class="lookbook-carousel">
-        <div class="lookbook-track">
-          <div class="lookbook-item active" data-target="look-01">
+      <div class="lookbook-carousel swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide lookbook-item" data-target="look-01">
             <img src="img/vv-01.jpg" alt="穿搭 1">
           </div>
-          <div class="lookbook-item" data-target="look-02">
+          <div class="swiper-slide lookbook-item" data-target="look-02">
             <img src="img/vv-02.jpg" alt="穿搭 2">
           </div>
-          <div class="lookbook-item" data-target="look-03">
+          <div class="swiper-slide lookbook-item" data-target="look-03">
             <img src="img/vv-03.jpg" alt="穿搭 3">
           </div>
-          <div class="lookbook-item" data-target="look-04">
+          <div class="swiper-slide lookbook-item" data-target="look-04">
             <img src="img/vv-4.jpg" alt="穿搭 4">
           </div>
-          <div class="lookbook-item" data-target="look-05">
+          <div class="swiper-slide lookbook-item" data-target="look-05">
             <img src="img/vv-05.jpg" alt="穿搭 5">
           </div>
-          <div class="lookbook-item" data-target="look-06">
+          <div class="swiper-slide lookbook-item" data-target="look-06">
             <img src="img/vv-06.jpg" alt="穿搭 6">
           </div>
-          <div class="lookbook-item" data-target="look-07">
+          <div class="swiper-slide lookbook-item" data-target="look-07">
             <img src="img/vv-07.jpg" alt="穿搭 7">
           </div>
-          <div class="lookbook-item" data-target="look-08">
+          <div class="swiper-slide lookbook-item" data-target="look-08">
             <img src="img/vv-08.jpg" alt="穿搭 8">
           </div>
-          <div class="lookbook-item" data-target="look-09">
+          <div class="swiper-slide lookbook-item" data-target="look-09">
             <img src="img/vv-09.jpg" alt="穿搭 9">
           </div>
-          <div class="lookbook-item" data-target="look-10">
+          <div class="swiper-slide lookbook-item" data-target="look-10">
+            <img src="img/vv-10.jpg" alt="穿搭 10">
+          </div>
+          <div class="swiper-slide lookbook-item" data-target="look-01">
+            <img src="img/vv-01.jpg" alt="穿搭 1">
+          </div>
+          <div class="swiper-slide lookbook-item" data-target="look-02">
+            <img src="img/vv-02.jpg" alt="穿搭 2">
+          </div>
+          <div class="swiper-slide lookbook-item" data-target="look-03">
+            <img src="img/vv-03.jpg" alt="穿搭 3">
+          </div>
+          <div class="swiper-slide lookbook-item" data-target="look-04">
+            <img src="img/vv-4.jpg" alt="穿搭 4">
+          </div>
+          <div class="swiper-slide lookbook-item" data-target="look-05">
+            <img src="img/vv-05.jpg" alt="穿搭 5">
+          </div>
+          <div class="swiper-slide lookbook-item" data-target="look-06">
+            <img src="img/vv-06.jpg" alt="穿搭 6">
+          </div>
+          <div class="swiper-slide lookbook-item" data-target="look-07">
+            <img src="img/vv-07.jpg" alt="穿搭 7">
+          </div>
+          <div class="swiper-slide lookbook-item" data-target="look-08">
+            <img src="img/vv-08.jpg" alt="穿搭 8">
+          </div>
+          <div class="swiper-slide lookbook-item" data-target="look-09">
+            <img src="img/vv-09.jpg" alt="穿搭 9">
+          </div>
+          <div class="swiper-slide lookbook-item" data-target="look-10">
             <img src="img/vv-10.jpg" alt="穿搭 10">
           </div>
         </div>
@@ -754,12 +791,24 @@
 
   <div class="sidebar-overlay" id="sidebar-overlay"></div>
   <nav class="sidebar-nav" id="sidebar-nav">
+
+    <ul class="sidebar-list menu-content" id="menu-mobile-main">
+      <li class="section-title">主選單 MENU</li>
+
+      <li><a href="#" class="mobile-nav-link" data-target="menu-inspiration">風格靈感 Inspiration</a></li>
+      <li><a href="#" class="mobile-nav-link" data-target="menu-new-in">新品 New In</a></li>
+      <li><a href="#" class="mobile-nav-link" data-target="menu-shop">SHOP 所有商品</a></li>
+      <li><a href="#" class="mobile-nav-link" data-target="menu-life-store">生活選物 Life Store</a></li>
+      <li><a href="#" class="mobile-nav-link" data-target="menu-sale" style="color: #d00;">優惠 SALE</a></li>
+    </ul>
+
     <div class="sidebar-header">
       <img src="img/logo.svg" alt="QUEEN SHOP" class="sidebar-logo">
       <button id="close-btn" class="close-btn">&times;</button>
     </div>
 
     <ul class="sidebar-list menu-content" id="menu-inspiration">
+      <li class="back-to-main"><span class="main-link" style="color:#888;">❮ 返回主選單</span></li>
       <li class="section-title">風格靈感 Inspiration</li>
 
       <li class="has-submenu">
@@ -801,6 +850,7 @@
     </ul>
 
     <ul class="sidebar-list menu-content" id="menu-new-in">
+      <li class="back-to-main"><span class="main-link" style="color:#888;">❮ 返回主選單</span></li>
       <li class="section-title">新品 NEW IN</li>
       <li><a href="#" class="main-link">本週新品 (This Week)</a></li>
       <li><a href="#" class="main-link">上週新品 (Last Week)</a></li>
@@ -809,6 +859,7 @@
     </ul>
 
     <ul class="sidebar-list menu-content" id="menu-shop">
+      <li class="back-to-main"><span class="main-link" style="color:#888;">❮ 返回主選單</span></li>
       <li class="section-title">商品類別 By Category</li>
 
       <li class="has-submenu">
@@ -871,6 +922,7 @@
     </ul>
 
     <ul class="sidebar-list menu-content" id="menu-life-store">
+      <li class="back-to-main"><span class="main-link" style="color:#888;">❮ 返回主選單</span></li>
       <li class="section-title">生活選物 Life Store</li>
       <li><a href="#" class="main-link">品牌故事 (Our Story)</a></li>
       <li><a href="#" class="main-link">門市體驗 (Store Experience)</a></li>
@@ -896,12 +948,14 @@
     </ul>
 
     <ul class="sidebar-list menu-content" id="menu-sale">
+      <li class="back-to-main"><span class="main-link" style="color:#888;">❮ 返回主選單</span></li>
       <li class="section-title" style="color: #d00;">優惠 SALE</li>
       <li><a href="#" class="main-link highlight">精選特別價格</a></li>
       <li><a href="#" class="main-link highlight">任選兩件組合</a></li>
     </ul>
 
   </nav>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
