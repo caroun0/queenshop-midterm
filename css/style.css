@@ -1593,3 +1593,65 @@ body.inner-page .menu-trigger {
 .mobile-nav-link[style*="color: #d00"] {
   font-weight: bold;
 }
+
+/* --- 通用間距工具類 (對應 HTML 修改) --- */
+.mt-large { margin-top: 60px; }
+.mt-medium { margin-top: 40px; }
+
+/* =========================================
+   RWD 針對 New In 頁面的優化
+   ========================================= */
+@media (max-width: 768px) {
+
+  /* 1. 調整上方標題與 Hero 的距離 */
+  .mt-large { margin-top: 30px; }
+  .mt-medium { margin-top: 25px; }
+
+  /* 2. 分類導覽列 (Inspiration Promo Nav) 改為 2 欄 */
+  /* 原本是 4 欄，手機版太擠 */
+  .inspiration-promo-nav ul {
+    grid-template-columns: repeat(2, 1fr); /* 改成 2x2 格子 */
+    gap: 10px;
+  }
+
+  .inspiration-promo-nav a {
+    padding: 12px 5px;   /* 減少內距 */
+    font-size: 13px;     /* 字體縮小 */
+    justify-content: center; /* 文字居中 */
+    text-align: center;
+  }
+
+  /* 隱藏箭頭，避免空間不足 */
+  .inspiration-promo-nav li a::after {
+    display: none;
+  }
+
+  /* 如果希望第一項 NEW IN 比較顯眼，可以保留粗體 */
+  .inspiration-promo-nav li:first-child a {
+    font-weight: 700;
+  }
+
+  /* 3. 商品列表 (Product Grid) 改為 2 欄 */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* 一排兩個 */
+    gap: 15px; /* 間距縮小 */
+  }
+
+  /* 4. 調整 Header Icons (右上方) */
+  /* 避免 Icon 太多太擠，可以隱藏 User 和 List，只留 Search 和 Cart */
+  .header-icons ul li:nth-child(2), /* User */
+  .header-icons ul li:nth-child(4), /* List */
+  .header-icons ul li:nth-child(5)  /* More */ {
+    display: none;
+  }
+
+  /* 5. 確保內頁 Header 漢堡線條是黑色的 */
+  body.inner-page .mobile-menu-btn span {
+    background-color: #333;
+  }
+
+  /* 6. Footer 調整 */
+  .footer-links ul {
+    gap: 10px 20px; /* 縮小行距 */
+  }
+}

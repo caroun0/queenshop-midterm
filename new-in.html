@@ -6,48 +6,41 @@
   <title>NEW IN 本週新品 - QUEEN SHOP</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .hero-sub { height: 60vh; } /* 子頁面高度設為 60% 螢幕高度 */
+    .hero-sub { height: 60vh; }
+    /* 手機版 Hero 高度改小，避免佔據太多畫面 */
+    @media (max-width: 768px) {
+      .hero-sub { height: 40vh; }
+    }
   </style>
 </head>
-<body>
-
-<header class="main-header header-transparent">
+<body> <header class="main-header">
   <div class="container">
     <div class="header-top">
+      <button class="mobile-menu-btn" id="mobile-menu-trigger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
       <a href="index.html" class="logo">
         <img src="img/logo.svg" alt="QUEEN SHOP">
       </a>
+
       <div class="header-icons">
         <ul>
           <li><a href="#"><img src="img/search.svg" alt="Search"></a></li>
-          <li><a href="#"><img src="img/user.svg" alt="User"></a></li>
-          <li><a href="#"><img src="img/car.svg" alt="Cart"></a></li>
-          <li><a href="#"><img src="img/list.svg" alt="List"></a></li>
-          <li><a href="#"><img src="img/more.svg" alt="More"></a></li>
+          <li><a href="#"><img src="img/user.svg" alt="User"></a></li> <li><a href="#"><img src="img/car.svg" alt="Cart"></a></li>
         </ul>
       </div>
     </div>
+
     <nav class="main-nav">
       <ul>
-        <li>
-          <a href="#" class="menu-trigger" data-menu="menu-inspiration">風格靈感</a>
-        </li>
-
-        <li>
-          <a href="#" class="menu-trigger" data-menu="menu-new-in">新品</a>
-        </li>
-
-        <li>
-          <a href="#" class="menu-trigger" data-menu="menu-shop">SHOP(所有商品)</a>
-        </li>
-
-        <li>
-          <a href="#" class="menu-trigger" data-menu="menu-life-store">生活選物</a>
-        </li>
-
-        <li>
-          <a href="#" class="menu-trigger" data-menu="menu-sale">優惠</a>
-        </li>
+        <li><a href="#" class="menu-trigger" data-menu="menu-inspiration">風格靈感</a></li>
+        <li><a href="#" class="menu-trigger" data-menu="menu-new-in">新品</a></li>
+        <li><a href="#" class="menu-trigger" data-menu="menu-shop">SHOP(所有商品)</a></li>
+        <li><a href="#" class="menu-trigger" data-menu="menu-life-store">生活選物</a></li>
+        <li><a href="#" class="menu-trigger" data-menu="menu-sale">優惠</a></li>
       </ul>
     </nav>
   </div>
@@ -55,13 +48,13 @@
 
 <main>
   <section class="hero hero-sub">
-    <img src="img/251028-03.jpg" alt="New In" class="hero-image">
+    <img src="img/251028-03.jpg" alt="New In" class="hero-image" style="object-position: top;">
   </section>
 
   <div class="container">
 
     <section class="section inspiration">
-      <div class="inspiration-header" style="margin-top: 60px;">
+      <div class="inspiration-header mt-large">
         <h2>NEW IN 本週新品</h2>
         <p>掌握最新流行趨勢，第一時間入手質感單品。</p>
       </div>
@@ -69,16 +62,16 @@
       <nav class="inspiration-promo-nav">
         <ul>
           <li class="active"><a href="new-in.html">NEW IN</a></li>
-          <li><a href="cool-feeling.html">COOL FFEELING 涼感系列</a></li>
+          <li><a href="cool-feeling.html">COOL FEELING 涼感系列</a></li>
           <li><a href="collaboration.html">最新聯名</a></li>
           <li><a href="contest.html">穿搭大賽精選</a></li>
         </ul>
       </nav>
 
-      <div class="product-grid" id="product-list" style="margin-top: 40px;">
+      <div class="product-grid mt-medium" id="product-list">
         <div class="product-card">
           <a href="product.html">
-            <img src="img/product-1.jpg" alt="抽鬚剪接設計傘擺牛仔裙 S/M/L" class="placeholder">
+            <img src="img/product-1.jpg" alt="商品圖" class="placeholder">
             <div class="product-info">
               <p class="product-name">抽鬚剪接設計傘擺牛仔裙 S/M/L</p>
               <p class="product-price">NT 790</p>
@@ -88,7 +81,7 @@
         </div>
         <div class="product-card">
           <a href="product.html">
-            <img src="img/product-2.jpg" alt="大口袋工裝設計彎刀長褲 兩色售 S/M/L" class="placeholder">
+            <img src="img/product-2.jpg" alt="商品圖" class="placeholder">
             <div class="product-info">
               <p class="product-name">大口袋工裝設計彎刀長褲 兩色售 S/M/L</p>
               <p class="product-price">NT 790</p>
@@ -98,7 +91,7 @@
         </div>
         <div class="product-card">
           <a href="product.html">
-            <img src="img/product-3.jpg" alt="素面層次剪接夾克外套 兩色售" class="placeholder">
+            <img src="img/product-3.jpg" alt="商品圖" class="placeholder">
             <div class="product-info">
               <p class="product-name">素面層次剪接夾克外套 兩色售</p>
               <p class="product-price">NT 890</p>
@@ -108,7 +101,7 @@
         </div>
         <div class="product-card">
           <a href="product.html">
-            <img src="img/product-4.jpg" alt="荷葉透紗花苞罩衫背心 三色售" class="placeholder">
+            <img src="img/product-4.jpg" alt="商品圖" class="placeholder">
             <div class="product-info">
               <p class="product-name">荷葉透紗花苞罩衫背心 三色售</p>
               <p class="product-price">NT 590</p>
@@ -124,192 +117,61 @@
 
 <footer class="main-footer">
   <div class="container">
-
     <nav class="footer-social">
       <ul>
-        <li><a href="#"><img src="img/footericon-1.png" alt="Social Media 1"></a></li>
-        <li><a href="#"><img src="img/footericon-2.png" alt="Social Media 2"></a></li>
-        <li><a href="#"><img src="img/footericon-3.png" alt="Social Media 3"></a></li>
-        <li><a href="#"><img src="img/footericon-4.png" alt="Social Media 4"></a></li>
-        <li><a href="#"><img src="img/footericon-5.png" alt="Social Media 5"></a></li>
-        <li><a href="#"><img src="img/footericon-6.png" alt="Social Media 6"></a></li>
+        <li><a href="#"><img src="img/footericon-1.png" alt="IG"></a></li>
+        <li><a href="#"><img src="img/footericon-2.png" alt="FB"></a></li>
+        <li><a href="#"><img src="img/footericon-3.png" alt="Line"></a></li>
       </ul>
     </nav>
-
-    <nav class="footer-links">
-      <ul>
-        <li><a href="#">最新消息</a></li>
-        <li><a href="#">常見問題</a></li>
-        <li><a href="#">門市資訊</a></li>
-        <li><a href="#">會員權益</a></li>
-        <li><a href="#">售後服務</a></li>
-      </ul>
-    </nav>
-
-    <div class="footer-contact">
-      <p>MON-FRI 9:00-18:00</p>
-      <p>TEL:(02)2995-9996 / FAX:(02)2995-9978</p>
-      <p>service@queenshop.com.tw</p>
-    </div>
-
     <div class="footer-copyright">
       <p>2025 QUEENSHOP ALL Rights Reserved</p>
-      <p>達爾亞貿易有限公司台灣分公司 | 統編53678183</p>
-      <p>警行政院環境保環「網購包裝減量標章」<img src="img/f3.png" alt="標章" style="vertical-align: middle;"></p>
     </div>
-
   </div>
 </footer>
+
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 <nav class="sidebar-nav" id="sidebar-nav">
   <div class="sidebar-header">
     <img src="img/logo.svg" alt="QUEEN SHOP" class="sidebar-logo">
     <button id="close-btn" class="close-btn">&times;</button>
   </div>
-
-  <ul class="sidebar-list menu-content" id="menu-inspiration">
-    <li class="section-title">風格靈感 Inspiration</li>
-
-    <li class="has-submenu">
-      <div class="submenu-toggle"><span class="main-link">本週主題 (Weekly Story)</span><span class="arrow">+</span></div>
-      <ul class="submenu">
-        <li><a href="#">秋日岩手之旅</a></li>
-        <li><a href="#">本週員工這樣穿</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu">
-      <div class="submenu-toggle"><span class="main-link">風格穿搭誌 (Style Guide)</span><span class="arrow">+</span></div>
-      <ul class="submenu">
-        <li><a href="#">重點單品企劃</a></li>
-        <li><a href="#">小資女穿搭指南</a></li>
-        <li><a href="#">男生穿搭</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu">
-      <div class="submenu-toggle"><span class="main-link">旅拍企劃 (Lookbook)</span><span class="arrow">+</span></div>
-      <ul class="submenu">
-        <li><a href="#">岩手</a></li>
-        <li><a href="#">嘉義</a></li>
-        <li><a href="#">宜蘭</a></li>
-        <li><a href="#">清邁</a></li>
-        <li><a href="#">熊本</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu">
-      <div class="submenu-toggle"><span class="main-link">品牌聯名 (Collabs)</span><span class="arrow">+</span></div>
-      <ul class="submenu">
-        <li><a href="#">姵萱聯名企劃</a></li>
-        <li><a href="#">COPPER中分哥</a></li>
-        <li><a href="#">TOMBONIA</a></li>
-        <li><a href="#">PAI PAI CANNOLI</a></li>
-        <li><a href="#">JOGUMAN登場</a></li>
-      </ul>
-    </li>
-    <li><a href="#" class="main-link">穿搭大賽 (UGC Contest)</a></li>
-  </ul>
-
-  <ul class="sidebar-list menu-content" id="menu-new-in">
-    <li class="section-title">新品 NEW IN</li>
-    <li><a href="#" class="main-link">本週新品 (This Week)</a></li>
-    <li><a href="#" class="main-link">上週新品 (Last Week)</a></li>
-    <li><a href="#" class="main-link">熱賣補貨 (Restock)</a></li>
-    <li><a href="#" class="main-link">現貨專區 (In Stock)</a></li>
-  </ul>
-
-  <ul class="sidebar-list menu-content" id="menu-shop">
-    <li class="section-title">商品類別 By Category</li>
-
-    <li class="has-submenu">
-      <div class="submenu-toggle"><span class="main-link">上著 (Tops)</span><span class="arrow">+</span></div>
-      <ul class="submenu">
-        <li><a href="#">背心 / 上衣 / T恤</a></li>
-        <li><a href="#">襯衫 / 毛衣 / 罩衫</a></li>
-        <li><a href="#">內搭 / 微高領</a></li>
-        <li><a href="#">套裝 / 連帽上衣</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu">
-      <div class="submenu-toggle"><span class="main-link">下著 (Bottoms)</span><span class="arrow">+</span></div>
-      <ul class="submenu">
-        <li><a href="#">短褲 / 長褲</a></li>
-        <li><a href="#">牛仔褲 / 褲裙</a></li>
-        <li><a href="#">寬褲 / 西裝褲</a></li>
-        <li><a href="#">長裙 / 短裙</a></li>
-      </ul>
-    </li>
-    <li><a href="#" class="main-link">洋裝 / 連身 (Dresses)</a></li>
-    <li class="has-submenu">
-      <div class="submenu-toggle"><span class="main-link">外套 (Outerwear)</span><span class="arrow">+</span></div>
-      <ul class="submenu">
-        <li><a href="#">背心外套 / 皮衣</a></li>
-        <li><a href="#">鋪棉 / 牛仔 / 風衣</a></li>
-        <li><a href="#">西裝 / 連帽 / 針織</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu">
-      <div class="submenu-toggle"><span class="main-link">鞋款 & 配件</span><span class="arrow">+</span></div>
-      <ul class="submenu">
-        <li><a href="#">CONVERSE / 皮鞋 / 靴款</a></li>
-        <li><a href="#">飾品 / 帽子 / 包包</a></li>
-        <li><a href="#">襪子 / 髮飾 / 眼鏡</a></li>
-      </ul>
-    </li>
-
-    <li class="section-title" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">風格支線 Collections</li>
-
-    <li class="has-submenu">
-      <div class="submenu-toggle"><span class="main-link">QUEEN SHOP</span><span class="arrow">+</span></div>
-      <ul class="submenu">
-        <li><a href="#">上著 / 下著 / 連身</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu">
-      <div class="submenu-toggle"><span class="main-link">LADY</span><span class="arrow">+</span></div>
-      <ul class="submenu">
-        <li><a href="#">上著 / 下著 / 連身</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu">
-      <div class="submenu-toggle"><span class="main-link">OUTDOOR & MEN</span><span class="arrow">+</span></div>
-      <ul class="submenu">
-        <li><a href="#">OUTDOOR 系列</a></li>
-        <li><a href="#">FOR MEN 系列</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul class="sidebar-list menu-content" id="menu-life-store">
-    <li class="section-title">生活選物 Life Store</li>
-    <li><a href="#" class="main-link">品牌故事 (Our Story)</a></li>
-    <li><a href="#" class="main-link">門市體驗 (Store Experience)</a></li>
-
-    <li class="has-submenu">
-      <div class="submenu-toggle"><span class="main-link">露營戶外 (Camping)</span><span class="arrow">+</span></div>
-      <ul class="submenu">
-        <li><a href="#">QUICK CAMP</a></li>
-        <li><a href="#">ADAMOUTDOOR</a></li>
-        <li><a href="#">THOR BOX</a></li>
-        <li><a href="#">TRUVII</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu">
-      <div class="submenu-toggle"><span class="main-link">品牌選品 (Select Brands)</span><span class="arrow">+</span></div>
-      <ul class="submenu">
-        <li><a href="#">COPPER中分哥</a></li>
-        <li><a href="#">TOMBONIA</a></li>
-        <li><a href="#">韓國選品</a></li>
-        <li><a href="#">日本選品</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul class="sidebar-list menu-content" id="menu-sale">
-    <li class="section-title" style="color: #d00;">優惠 SALE</li>
-    <li><a href="#" class="main-link highlight">精選特別價格</a></li>
-    <li><a href="#" class="main-link highlight">任選兩件組合</a></li>
+  <ul class="sidebar-list menu-content active" id="menu-mobile-main">
+    <li class="section-title">主選單 MENU</li>
+    <li><a href="#" class="mobile-nav-link" onclick="openSidebarContent('menu-inspiration')">風格靈感 <span class="arrow">></span></a></li>
+    <li><a href="#" class="mobile-nav-link" onclick="openSidebarContent('menu-new-in')">新品 <span class="arrow">></span></a></li>
+    <li><a href="#" class="mobile-nav-link" onclick="openSidebarContent('menu-shop')">SHOP <span class="arrow">></span></a></li>
+    <li><a href="#" class="mobile-nav-link" onclick="openSidebarContent('menu-life-store')">生活選物 <span class="arrow">></span></a></li>
+    <li><a href="#" class="mobile-nav-link" style="color: #d00;" onclick="openSidebarContent('menu-sale')">優惠 SALE <span class="arrow">></span></a></li>
   </ul>
 
 </nav>
+
 <script src="js/main.js"></script>
+<script>
+  // 簡單的 JS 讓漢堡按鈕能打開側邊欄
+  document.getElementById('mobile-menu-trigger').addEventListener('click', function() {
+    document.getElementById('sidebar-nav').classList.add('active');
+    document.getElementById('sidebar-overlay').classList.add('active');
+    // 確保打開時顯示主選單
+    document.querySelectorAll('.menu-content').forEach(el => el.classList.remove('active'));
+    document.getElementById('menu-mobile-main').classList.add('active');
+  });
+
+  document.getElementById('sidebar-overlay').addEventListener('click', closeSidebar);
+  document.getElementById('close-btn').addEventListener('click', closeSidebar);
+
+  function closeSidebar() {
+    document.getElementById('sidebar-nav').classList.remove('active');
+    document.getElementById('sidebar-overlay').classList.remove('active');
+  }
+
+  function openSidebarContent(id) {
+    // 先隱藏所有
+    document.querySelectorAll('.menu-content').forEach(el => el.classList.remove('active'));
+    // 顯示目標
+    document.getElementById(id).classList.add('active');
+  }
+</script>
 </body>
 </html>
